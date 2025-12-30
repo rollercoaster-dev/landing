@@ -144,6 +144,44 @@ THE RELIEF:       Warm cream (#e8dfd0) + Purple-dark (#6b5fad) accents
 
 ## Experience Features
 
+### The scroll IS the ride (counterintuitive behavior)
+The page doesn't scroll like a normal page. It scrolls like a rollercoaster — including side to side.
+
+**THE CLIMB:**
+- Scroll feels heavy, effortful
+- You scroll a lot, the page moves a little
+- Building tension, anticipation
+- Like pulling against gravity
+
+**THE DROP:**
+- Scroll releases
+- A little scroll = lots of movement
+- The page rushes past you
+- Momentum, falling, the stomach-drop feeling
+
+**THE CURVES / SIDE TO SIDE:**
+- Vertical scroll triggers horizontal movement
+- The track curves — you feel the turn
+- Content slides left or right as you scroll down
+- Like leaning into the curves of a real coaster
+
+**THE DISORIENTATION:**
+- Scroll feels uncertain
+- Horizontal drift when you expect vertical
+- Things don't move exactly how you expect
+- Slightly off, slightly wrong
+- Maybe the whole viewport tilts slightly?
+
+**THE RELIEF:**
+- Scroll normalizes
+- Calm, predictable, 1:1 feeling
+- Straight down, no surprises
+- The exhale — back on solid ground
+
+This is the secret sauce. The scroll behavior itself tells the emotional story.
+
+---
+
 ### Scroll reveals at your pace
 - No auto-advancing, no rushed animations
 - You control the speed of the ride
