@@ -1,5 +1,22 @@
 <script setup lang="ts">
 import { stories, questions } from '~/data/content'
+
+useSeoMeta({
+  title: 'Rollercoaster.dev — Ride Yours',
+  description: 'Progress tracking for minds that don\'t move in straight lines',
+  ogTitle: 'Rollercoaster.dev — Ride Yours',
+  ogDescription: 'Progress tracking for minds that don\'t move in straight lines',
+  ogUrl: 'https://rollercoaster.dev',
+  ogType: 'website',
+  ogImage: 'https://rollercoaster.dev/og-image.png',
+  ogImageAlt: 'Rollercoaster.dev — Progress tracking for minds that don\'t move in straight lines',
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Rollercoaster.dev — Ride Yours',
+  twitterDescription: 'Progress tracking for minds that don\'t move in straight lines',
+  twitterImage: 'https://rollercoaster.dev/og-image.png',
+  twitterImageAlt: 'Rollercoaster.dev — Progress tracking for minds that don\'t move in straight lines',
+  themeColor: '#ffe50c',
+})
 </script>
 
 <template>
