@@ -65,7 +65,7 @@ const containerStyle = computed(() => ({
 
 /* Giant faded name background */
 .story-name {
-  font-family: 'Anybody', sans-serif;
+  font-family: var(--font-headline);
   font-size: clamp(6rem, 20vw, 16rem);
   font-weight: 900;
   text-transform: uppercase;
@@ -90,7 +90,7 @@ const containerStyle = computed(() => ({
 
 /* Story title */
 .story-title {
-  font-family: 'Anybody', sans-serif;
+  font-family: var(--font-headline);
   font-weight: 700;
   font-size: clamp(1.5rem, 4vw, 2.5rem);
   color: var(--story-accent);
@@ -101,7 +101,7 @@ const containerStyle = computed(() => ({
 
 /* Story text */
 .story-text {
-  font-family: 'Instrument Sans', sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(0.95rem, 1.8vw, 1.15rem);
   line-height: 1.9;
   color: rgba(255, 255, 255, 0.75);

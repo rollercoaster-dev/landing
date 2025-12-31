@@ -84,7 +84,7 @@ const getCurrentDate = () => {
 
 /* Heading */
 .badges-heading {
-  font-family: 'Anybody', sans-serif;
+  font-family: var(--font-headline);
   font-size: clamp(2rem, 6vw, 4rem);
   font-weight: 900;
   text-transform: uppercase;
@@ -94,7 +94,7 @@ const getCurrentDate = () => {
 
 /* Intro text */
 .badges-intro {
-  font-family: 'DM Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.5);
   margin-bottom: 3rem;
@@ -128,7 +128,7 @@ const getCurrentDate = () => {
 
 /* Badge name */
 .badge-name {
-  font-family: 'Anybody', sans-serif;
+  font-family: var(--font-headline);
   font-size: 0.85rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -139,7 +139,7 @@ const getCurrentDate = () => {
 
 /* Badge answer */
 .badge-answer {
-  font-family: 'Instrument Sans', sans-serif;
+  font-family: var(--font-body);
   font-size: 1.1rem;
   line-height: 1.5;
   color: var(--color-white);
@@ -147,7 +147,7 @@ const getCurrentDate = () => {
 
 /* Badge date */
 .badge-date {
-  font-family: 'DM Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.7rem;
   color: rgba(255, 255, 255, 0.35);
   margin-top: 1rem;

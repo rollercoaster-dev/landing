@@ -17,12 +17,12 @@
       <span class="block md:mr-[-15vw] md:text-right">Path</span>
     </h1>
     <p
-      class="tagline font-[family-name:var(--font-mono)] text-[clamp(0.8rem,1.5vw,1rem)] font-normal text-[var(--color-climb-text)] opacity-70 absolute bottom-12 right-12 text-right max-w-[300px]"
+      class="tagline font-[family-name:var(--font-mono)] text-[clamp(0.8rem,1.5vw,1rem)] font-normal text-[var(--color-climb-text)] opacity-70 mt-12 md:mt-0 md:absolute md:bottom-12 md:right-12 text-left md:text-right max-w-[300px]"
     >
       progress tracking for minds that don't move in straight lines
     </p>
     <span
-      class="scroll-hint font-[family-name:var(--font-mono)] absolute bottom-12 left-12 text-xs opacity-50"
+      class="scroll-hint font-[family-name:var(--font-mono)] hidden md:block absolute bottom-12 left-12 text-xs opacity-50"
     >
       (scroll)
     </span>

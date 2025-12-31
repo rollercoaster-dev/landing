@@ -175,7 +175,7 @@ onUnmounted(() => {
 }
 
 .question-text {
-  font-family: 'Anybody', sans-serif;
+  font-family: var(--font-headline);
   font-size: clamp(2rem, 6vw, 4.5rem);
   font-weight: 900;
   line-height: 1.05;
@@ -224,7 +224,7 @@ onUnmounted(() => {
 .question-input {
   width: 280px;
   padding: 1rem 1.2rem;
-  font-family: 'DM Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 1rem;
   background: rgba(255, 255, 255, 0.05);
   border: 2px solid var(--question-accent);
@@ -242,7 +242,7 @@ onUnmounted(() => {
 }
 
 .question-saved {
-  font-family: 'DM Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.75rem;
   color: var(--question-accent);
   margin-top: 0.5rem;
