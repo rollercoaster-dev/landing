@@ -1,79 +1,103 @@
-# Claude Code Agents
+# Agent Architecture
 
-Custom agents for the Rollercoaster.dev landing page project.
+This project uses an orchestrator-worker pattern. **Claude (main) is the orchestrator**, worker agents handle focused tasks.
 
-## Architecture: Orchestrator-Worker Pattern
+## Key Insight
 
-**Claude (main) is the orchestrator.** Worker agents handle focused tasks.
+Subagents cannot stop mid-task and wait for approval. They complete their task and return.
 
-Subagents complete their task and return results - they don't stop mid-task for approval. Gates are handled by Claude (main).
+Therefore: **Claude (main) handles the gates**, worker agents do focused work.
 
-### Roles
+## Roles
 
 - **Human**: Approves at each gate
 - **Claude (Main)**: Orchestrates workflow, handles gates, spawns workers
-- **Worker Agents**: Execute focused tasks and return results
+- **Worker Agents**: Execute focused tasks (research, plan, implement, review)
 
-## Agent Inventory
+## Architecture
 
 ```
-PLUGINS (Official)                    CUSTOM AGENTS (3 total)
-------------------                    ----------------------
-pr-review-toolkit (pre-PR review)     DEVELOPMENT:
-hookify (behavioral hooks)              landing-developer
-context7 (library docs)                 design-reviewer
-frontend-design (UI generation)
-                                      MANAGEMENT:
-                                        issue-manager
+┌─────────────────────────────────────────────────────────────────┐
+│                         Human (You)                              │
+│                    (approves at each gate)                       │
+├─────────────────────────────────────────────────────────────────┤
+│                     Claude (Main)                                │
+│              THE ORCHESTRATOR - handles gates                    │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│   /work-on-issue 2                                               │
+│           │                                                      │
+│           ▼                                                      │
+│   ╔═══════════════════╗                                          │
+│   ║  GATE 1: Issue    ║  ← Claude shows full issue               │
+│   ║  (you review)     ║                                          │
+│   ╚═════════╤═════════╝                                          │
+│             ▼                                                    │
+│   ┌──────────┐   ┌─────────┐                                     │
+│   │researcher│ → │ planner │  (worker agents)                    │
+│   └──────────┘   └────┬────┘                                     │
+│                       ▼                                          │
+│   ╔═══════════════════╗                                          │
+│   ║  GATE 2: Plan     ║  ← Claude shows full plan                │
+│   ║  (you review)     ║                                          │
+│   ╚═════════╤═════════╝                                          │
+│             ▼                                                    │
+│   ┌────────────────────────────────────────┐                     │
+│   │  For each atomic commit:               │                     │
+│   │    ┌────────────┐                      │                     │
+│   │    │implementer │ → diff               │                     │
+│   │    └────────────┘                      │                     │
+│   │           ▼                            │                     │
+│   │   ╔═══════════════════╗                │                     │
+│   │   ║  GATE 3: Commit   ║ ← You review   │                     │
+│   │   ╚═══════════════════╝                │                     │
+│   └────────────────────────────────────────┘                     │
+│             ▼                                                    │
+│   ┌─────────────────┐                                            │
+│   │ design-reviewer │ → findings → PR                            │
+│   └─────────────────┘                                            │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
-## Development Agents
+## Triggering the Workflow
 
-### landing-developer.md
+Use the slash command:
 
-Implements Vue components from the prototype reference.
+```
+/work-on-issue 2
+```
 
-**Use for**:
-- Creating new components
-- Converting prototype sections to Vue
-- Setting up Tailwind styling
+This expands to a prompt that guides Claude through the gated workflow.
 
-**Trigger phrases**:
-- "implement the Hero component"
-- "create the DropSection"
-- "convert section X from prototype"
+## Worker Agents
 
-### design-reviewer.md
+### researcher
+**Purpose:** Gathers context before planning.
+- Analyzes prototype-v6.html for design patterns
+- Checks existing codebase patterns
+- Fetches library docs (Nuxt 3, Tailwind 4)
+- Returns structured findings
 
-Reviews components for design consistency and accessibility.
+### planner
+**Purpose:** Creates atomic commit plans.
+- Writes plan to `.claude/dev-plans/issue-{N}.md`
+- Each commit: message, files, acceptance criteria
+- Returns when plan file is written
 
-**Use for**:
-- Pre-PR design review
-- Accessibility audits
-- Style guide compliance checks
+### implementer
+**Purpose:** Implements ONE commit.
+- Works on single atomic commit from plan
+- Does NOT commit - returns diff
+- Matches prototype design exactly
 
-**Trigger phrases**:
-- "review design of Hero.vue"
-- "check accessibility"
-- "design review before PR"
+### design-reviewer
+**Purpose:** Validates design quality.
+- Neo-brutalist style compliance
+- Accessibility requirements
+- Mobile responsiveness
+- Prototype fidelity
 
-## Management Agents
-
-### issue-manager.md
-
-Plans and manages GitHub issues.
-
-**Use for**:
-- Breaking down features into issues
-- Setting up issue hierarchies
-- Milestone planning
-
-**Trigger phrases**:
-- "break down feature X into issues"
-- "set up issues for launch"
-- "what's blocking the milestone?"
-
-## Plugin Usage
+## Plugins
 
 | Plugin | When to Use |
 | --- | --- |
@@ -82,33 +106,39 @@ Plans and manages GitHub issues.
 | **context7** | Looking up Nuxt/Tailwind docs |
 | **frontend-design** | Generating new UI components |
 
-## Workflow Integration
+## Direct Agent Use
+
+You can use worker agents directly for focused tasks:
 
 ```
-Task
-  │
-  ▼
-╔═══════════════════╗
-║  GATE 1: Review   ║ ← Claude shows task details
-╚═════════╤═════════╝
-          ▼
-[landing-developer] → implements component
-          │
-          ▼
-[design-reviewer] → reviews implementation
-          │
-          ▼
-╔═══════════════════╗
-║  GATE 2: Pre-PR   ║ ← Claude shows review results
-╚═════════╤═════════╝
-          ▼
-    Create PR
+"Research how Tailwind 4 works"    → researcher
+"Review my component styling"      → design-reviewer
 ```
 
-## Tips
+## Why This Architecture?
 
-1. **Reference the prototype** - Always read `prototype-v6.html` first
-2. **Mobile first** - Start with mobile styles
-3. **Accessibility first** - Semantic HTML before CSS
-4. **Small changes** - One component per PR
-5. **Neo-brutalist style** - Bold, imperfect, expressive
+Based on [Anthropic's research](https://www.anthropic.com/engineering/claude-code-best-practices):
+
+1. **Subagents can't pause** - They complete tasks and return
+2. **Gates need the main agent** - Only Claude (main) can show output and wait
+3. **Workers should be focused** - One clear goal, input, output
+4. **Context is preserved** - Main Claude sees everything, workers get summaries
+
+## Agent Files
+
+```
+.claude/agents/
+├── README.md              # This file
+├── researcher.md          # Context gathering
+├── planner.md             # Implementation planning
+├── implementer.md         # Feature building (one commit)
+├── design-reviewer.md     # Design/accessibility review
+
+.claude/commands/
+└── work-on-issue.md       # Slash command for gated workflow
+```
+
+---
+
+**Version:** 2.0
+**Last Updated:** December 2024

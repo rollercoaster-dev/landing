@@ -132,16 +132,63 @@ pnpm test              # Run tests
 - Sufficient color contrast
 - Reduced motion support
 
-## Claude Code Configuration
+## Agent Workflow
 
-### Agent Architecture
+**I (Claude) am the orchestrator.** Worker agents handle focused tasks and return to me.
 
-This project uses a **simplified agent setup** focused on design and frontend development.
+Use `/work-on-issue {number}` to start the gated workflow.
+
+### The Gated Workflow
+
+```
+USER: /work-on-issue 2
+
+GATE 1 ─────────────────────────────────────────
+│ I fetch the issue with `gh issue view`
+│ I show you the FULL issue (verbatim)
+│ You review and say "proceed" or give feedback
+└───────────────────────────────────────────────
+
+RESEARCH ───────────────────────────────────────
+│ I spawn `researcher` agent → returns findings
+└───────────────────────────────────────────────
+
+PLANNING ───────────────────────────────────────
+│ I spawn `planner` agent with research findings
+│ Planner writes plan to .claude/dev-plans/
+└───────────────────────────────────────────────
+
+GATE 2 ─────────────────────────────────────────
+│ I show you the FULL plan
+│ You review and say "proceed" or give feedback
+└───────────────────────────────────────────────
+
+IMPLEMENTATION (per commit) ────────────────────
+│ For each atomic commit in the plan:
+│   I spawn `implementer` agent → returns diff
+│
+│   GATE 3 ─────────────────────────────────────
+│   │ I show you the diff
+│   │ You review and approve or request changes
+│   │ I commit (you approve the commit)
+│   └───────────────────────────────────────────
+└───────────────────────────────────────────────
+
+FINALIZATION ───────────────────────────────────
+│ I spawn `design-reviewer` → reviews quality
+│ I present findings
+│ You approve → I create PR
+└───────────────────────────────────────────────
+```
+
+### Worker Agents
 
 | Agent | Purpose |
-| --- | --- |
-| **landing-developer** | Implements components from prototype |
-| **design-reviewer** | Reviews design/UX decisions |
+|-------|---------|
+| `researcher` | Gathers codebase context, fetches library docs |
+| `planner` | Creates atomic commit plan in `.claude/dev-plans/` |
+| `implementer` | Implements ONE commit, returns diff |
+| `design-reviewer` | Validates design quality, accessibility |
 
 ### Plugins Used
 
@@ -152,18 +199,14 @@ This project uses a **simplified agent setup** focused on design and frontend de
 | **context7** | Library documentation lookup |
 | **frontend-design** | Production UI generation |
 
-### Workflow
+### Direct Agent Use
 
-See `.claude/WORKFLOW.md` for the development workflow.
+```
+"Research how Tailwind 4 works"    → researcher
+"Review my component styling"      → design-reviewer
+```
 
-**Quick version**:
-```
-1. Check issue/task
-2. Reference prototype-v6.html
-3. Implement component
-4. Validate (lint, type-check, accessibility)
-5. Create PR
-```
+See `.claude/agents/README.md` for full documentation.
 
 ## Model-Specific Behavior (Opus 4.5)
 
