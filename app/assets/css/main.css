@@ -104,7 +104,7 @@
   --color-white: #fafafa;
   --color-black: #0a0a0a;
 
-  /* Font Families (fonts will be loaded in Commit 5) */
+  /* Font Families */
   --font-headline: 'Anybody', sans-serif;
   --font-mono: 'DM Mono', monospace;
   --font-body: 'Instrument Sans', system-ui, sans-serif;
