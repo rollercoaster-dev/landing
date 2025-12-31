@@ -10,6 +10,8 @@
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "type-check": "nuxt typecheck"
   },
   "dependencies": {
@@ -19,7 +21,10 @@
     "vue-router": "^4.6.4"
   },
   "devDependencies": {
+    "@nuxt/eslint": "^1.12.1",
     "@tailwindcss/vite": "^4.1.18",
-    "tailwindcss": "^4.0.0"
+    "prettier": "^3.7.4",
+    "tailwindcss": "^4.0.0",
+    "typescript-eslint": "^8.51.0"
   }
 }

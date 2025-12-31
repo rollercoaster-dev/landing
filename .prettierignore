@@ -1,0 +1,25 @@
+# Build outputs
+dist
+.output
+.nuxt
+
+# Dependencies
+node_modules
+
+# Generated files
+*.min.js
+*.min.css
+
+# Lock files
+pnpm-lock.yaml
+package-lock.json
+
+# Prototype (don't format, keep as reference)
+prototype-v6.html
+
+# Claude Code config (managed separately)
+.claude/
+
+# Docs (markdown formatting preferences may differ)
+docs/
+CLAUDE.md

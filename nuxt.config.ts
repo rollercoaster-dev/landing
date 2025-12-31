@@ -2,20 +2,25 @@
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineNuxtConfig({
-  compatibilityDate: '2025-07-15',
+  modules: ['@nuxt/eslint', '@nuxtjs/seo'],
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
-
-  modules: ['@nuxtjs/seo'],
 
   site: {
     url: 'https://rollercoaster.dev',
     name: 'Rollercoaster.dev',
-    description: 'Progress tracking for minds that don\'t move in straight lines',
+    description: "Progress tracking for minds that don't move in straight lines",
     defaultLocale: 'en',
   },
+  compatibilityDate: '2025-07-15',
 
   vite: {
     plugins: [tailwindcss()],
+  },
+
+  eslint: {
+    config: {
+      stylistic: true, // Enable stylistic rules (formatting-like)
+    },
   },
 })

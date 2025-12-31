@@ -1,0 +1,64 @@
+<script setup lang="ts">
+// DropSection - The Drop
+// Dark gradient section with purple accent highlighting the drop
+</script>
+
+<template>
+  <section
+    class="drop min-h-[90vh] bg-gradient-to-b from-[var(--color-drop-bg)] via-[var(--color-drop-bg)] to-[var(--color-drop-bg-end)] text-[var(--color-drop-text)] py-40 px-8 pb-48 relative"
+  >
+    <div class="drop-content max-w-[800px] ml-0 md:ml-[10%]">
+      <h2
+        class="font-[family-name:var(--font-headline)] font-bold text-[clamp(2.5rem,8vw,6rem)] leading-[0.95] text-[var(--color-drop-accent)] mb-16 max-w-[600px]"
+      >
+        Sometimes the fog rolls in.
+      </h2>
+
+      <p
+        class="font-[family-name:var(--font-body)] font-normal text-[clamp(1.1rem,2vw,1.4rem)] leading-[2] text-white/60 mb-6"
+      >
+        The projects scatter. The momentum disappears.
+        You stop for a day, then a week, then you lose count.
+      </p>
+
+      <p
+        class="font-[family-name:var(--font-body)] font-normal text-[clamp(1.1rem,2vw,1.4rem)] leading-[2] text-white/60 mb-6"
+      >
+        Most tools punish this.
+      </p>
+
+      <div class="punish-list font-[family-name:var(--font-mono)] text-[1.1rem] my-8">
+        <span class="mr-8">
+          <span class="x text-[var(--color-drop-accent)] mr-1.5">×</span>
+          <span
+            class="text text-white/50 line-through decoration-[var(--color-drop-accent)] decoration-1"
+          >Streak broken</span>
+        </span>
+        <span class="mr-8">
+          <span class="x text-[var(--color-drop-accent)] mr-1.5">×</span>
+          <span
+            class="text text-white/50 line-through decoration-[var(--color-drop-accent)] decoration-1"
+          >Progress lost</span>
+        </span>
+        <span class="mr-8">
+          <span class="x text-[var(--color-drop-accent)] mr-1.5">×</span>
+          <span
+            class="text text-white/50 line-through decoration-[var(--color-drop-accent)] decoration-1"
+          >Start over</span>
+        </span>
+      </div>
+
+      <p
+        class="we-know text-[clamp(1.2rem,2.5vw,1.6rem)] text-[var(--color-white)] mt-12"
+      >
+        We know what that feels like.
+      </p>
+
+      <span
+        class="aside font-[family-name:var(--font-mono)] text-[0.7rem] text-white/30 mt-16 inline-block"
+      >
+        (still here? good.)
+      </span>
+    </div>
+  </section>
+</template>

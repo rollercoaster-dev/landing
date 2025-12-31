@@ -74,7 +74,7 @@
   src: url('/fonts/instrument-sans-700.woff2') format('woff2');
 }
 
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   /* Color Tokens - THE CLIMB */
