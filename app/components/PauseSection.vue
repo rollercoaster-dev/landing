@@ -159,6 +159,8 @@ onUnmounted(() => {
 
 .pause-input:focus {
   border-color: var(--color-relief-accent);
+  outline: 2px solid var(--color-relief-accent);
+  outline-offset: 2px;
 }
 
 .pause-input::placeholder {
