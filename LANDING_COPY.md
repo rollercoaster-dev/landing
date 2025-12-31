@@ -1,6 +1,6 @@
-# Landing Page Copy — Draft v1
+# Landing Page Copy — Draft v2
 
-*Workshopped: 2025-12-30*
+*Workshopped: 2025-12-31*
 
 ---
 
@@ -14,15 +14,26 @@
 ## Who we're building for
 
 **Lina** — *The quiet victory*
-> She reorganized the library's entire local history section while volunteering — months of quiet work no one asked for. She made a badge for herself, because *she* knew it mattered.
+> She reorganized the library's entire local history section while volunteering — months of quiet work she chose because she knew it mattered. When she finished, she made a badge for herself: **"Local History Archivist."** No approval queue. No external validation. Just a private way to honor something only she understood the weight of.
+
+*Do you have a quiet victory that deserves a mark?*
 
 **Eva** — *The big map*
-> In a manic surge, she planned a massive urban farm. Then crashed. Two years later, the platform showed her: the compost thread was always the strongest. That piece became real.
+> In a manic surge, she planned a massive urban farm — site surveys, greenhouse designs, compost networks. Dozens of badges for dozens of ideas, branching everywhere at once. Then the crash hit. She stopped. Months passed. Two years later, she reopened her account. The platform had kept everything. It showed her what she couldn't see before: the composting badge was always the strongest — and others had already earned it.
 
-**Marcus** — *The marathon song*
-> His concept album scattered into chaos across dozens of half-finished tracks. His mentor saw what he couldn't: "You already have an EP. Tracks 3, 7, 9, and 11." He finished it.
+*What's one thread you could pull from something you started?*
 
-<small>*These are composite stories based on neurodivergent experiences that shaped our design.*</small>
+**Malik** — *The midnight model*
+> He'd been teaching himself 3D modelling at night — weeks of on-off learning between everything else. When he finished his first complete scene, he uploaded the evidence: screenshots, a timelapse, a short reflection. The platform verified it. Not because anyone demanded proof — but because he wanted that checkmark for himself. It became the nudge he needed to start the next one.
+
+*What skill have you been quietly building?*
+
+**Carmen & Kayla** — *Passing it on*
+> After a full season of raised beds, Carmen made herself a badge — her own record of what she'd learned. Then she mentored Kayla, a 16-year-old who wanted to grow vegetables for her family. When Kayla finished her first bed, she made her own badge. Carmen verified it. Two other gardeners in the network approved it. Now Kayla has proof of something she built — and Carmen sees her knowledge rippling forward.
+
+*Who could you teach what you've learned?*
+
+<small>*Composite stories drawn from neurodivergent experiences.*</small>
 
 ---
 
