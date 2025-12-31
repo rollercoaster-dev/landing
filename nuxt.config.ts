@@ -4,6 +4,14 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineNuxtConfig({
   modules: ['@nuxt/eslint', '@nuxtjs/seo'],
   devtools: { enabled: true },
+
+  app: {
+    head: {
+      htmlAttrs: {
+        lang: 'en',
+      },
+    },
+  },
   css: ['~/assets/css/main.css'],
 
   site: {
