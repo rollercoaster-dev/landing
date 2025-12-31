@@ -40,9 +40,9 @@ useSeoMeta({
       id="main"
       class="stories"
     >
-      <p class="stories-header">
+      <h2 class="stories-header">
         Who we're building for
-      </p>
+      </h2>
 
       <template
         v-for="(story, i) in stories"
