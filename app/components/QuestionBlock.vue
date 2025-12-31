@@ -237,6 +237,11 @@ onUnmounted(() => {
   background: rgba(255, 255, 255, 0.1);
 }
 
+.question-input:focus-visible {
+  outline: 2px solid var(--question-accent);
+  outline-offset: 2px;
+}
+
 .question-input::placeholder {
   color: rgba(255, 255, 255, 0.3);
 }
