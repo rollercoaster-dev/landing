@@ -1,3 +1,79 @@
+/* Font Face Declarations */
+/* Anybody - Display/Headlines */
+@font-face {
+  font-family: 'Anybody';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/anybody-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Anybody';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/anybody-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Anybody';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('/fonts/anybody-900.woff2') format('woff2');
+}
+
+/* DM Mono - Monospace */
+@font-face {
+  font-family: 'DM Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/dm-mono-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'DM Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/dm-mono-500.woff2') format('woff2');
+}
+
+/* Instrument Sans - Body */
+@font-face {
+  font-family: 'Instrument Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/instrument-sans-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Instrument Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/instrument-sans-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Instrument Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/instrument-sans-600.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Instrument Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/instrument-sans-700.woff2') format('woff2');
+}
+
 @import "tailwindcss";
 
 @theme {
