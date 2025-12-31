@@ -5,57 +5,95 @@ Development workflow for the Rollercoaster.dev landing page.
 ## Overview
 
 ```
-Task → Research → Implement → Validate → PR
+Issue → Implement → Review → PR
 ```
 
-This is a simpler project than the monorepo - we use a streamlined 2-gate workflow.
+This is a simpler project than the monorepo - we use a streamlined 3-gate workflow.
+
+## Slash Commands
+
+| Command | Purpose | When to Use |
+| --- | --- | --- |
+| `/work-on-issue <number>` | Full gated workflow | Working on GitHub issues |
+| `/implement-component <name>` | Quick component creation | Rapid prototyping |
+| `/design-check [file]` | Design/accessibility review | Before creating PRs |
 
 ## Tools
 
 | Type | Name | Purpose | Invoke |
 | --- | --- | --- | --- |
+| Command | work-on-issue | Gated issue workflow | `/work-on-issue 123` |
+| Command | implement-component | Quick component build | `/implement-component Hero` |
+| Command | design-check | Pre-PR review | `/design-check` |
 | Skill | gh-issues | Issue management | Auto (ask about issues) |
 | Skill | gh-milestones | Milestone tracking | Auto (ask about milestones) |
-| Agent | landing-developer | Implement components | "implement component X" |
-| Agent | design-reviewer | Review design/UX | "review design of X" |
+| Agent | landing-developer | Implement components | Via commands |
+| Agent | design-reviewer | Review design/UX | Via `/design-check` |
 
-## Workflow Gates
+## Workflow Gates (3-Gate System)
 
-### Gate 1: Task Review
+### Gate 1: Issue Review
 
 Before starting any implementation:
 
-1. Understand the task/issue
+1. Fetch and show the full issue
 2. Reference `prototype-v6.html` for design
 3. Check `docs/DESIGN_DIRECTION.md` for style guidance
-4. **STOP** - Confirm understanding with user
+4. **STOP** - Wait for explicit "proceed" approval
 
-### Gate 2: Pre-PR Review
+### Gate 2: Implementation Review
+
+Before committing changes:
+
+1. Show the diff of all changes
+2. Explain what changed and why
+3. Reference the prototype section implemented
+4. **STOP** - Wait for explicit approval to commit
+
+### Gate 3: Pre-PR Review
 
 Before creating a PR:
 
 1. Run validation: `pnpm lint && pnpm type-check`
-2. Check accessibility (semantic HTML, focus states)
-3. Review mobile responsiveness
-4. **STOP** - Show changes and get approval
+2. Run design-reviewer for accessibility/style check
+3. Run pr-review-toolkit:code-reviewer
+4. **STOP** - Show findings and wait for approval
 
-## Common Commands
+## Quick Reference
 
-```bash
-# Status
-"what's the current task?"
-"show me the prototype section for X"
+### Using /work-on-issue
 
-# Implementation
-"implement the Hero component"
-"add the DropSection from prototype"
+```
+/work-on-issue 5
 
-# Review
-"review the design of Hero.vue"
-"check accessibility of components"
+→ GATE 1: Shows issue #5, waits for "proceed"
+→ Creates branch, implements changes
+→ GATE 2: Shows diff, waits for approval to commit
+→ Runs design review
+→ GATE 3: Shows review findings, waits for approval
+→ Creates PR
+```
 
-# PR
-"create pr for the hero section"
+### Using /implement-component
+
+```
+/implement-component Hero
+
+→ Reads prototype-v6.html
+→ Creates components/Hero.vue
+→ Validates with pnpm lint && pnpm type-check
+→ Reports completion (no commit)
+```
+
+### Using /design-check
+
+```
+/design-check Hero.vue
+
+→ Reads design guidelines
+→ Checks style compliance
+→ Checks accessibility
+→ Reports findings by severity
 ```
 
 ## Branch Naming
@@ -88,6 +126,10 @@ Examples:
 
 ```
 .claude/
+├── commands/                # Slash commands
+│   ├── work-on-issue.md
+│   ├── implement-component.md
+│   └── design-check.md
 ├── agents/                  # Agent definitions
 │   ├── landing-developer.md
 │   └── design-reviewer.md
@@ -109,8 +151,9 @@ Examples:
 
 ## Tips
 
-1. **Reference the prototype** - `prototype-v6.html` is the source of truth
-2. **Mobile first** - Always check mobile layout
-3. **Accessibility** - Semantic HTML before CSS
-4. **Small PRs** - One component or feature per PR
-5. **Neo-brutalist style** - Bold, imperfect, expressive
+1. **Use /work-on-issue** for GitHub issues - ensures proper gating
+2. **Use /implement-component** for quick prototyping - no commits
+3. **Use /design-check** before any PR - catches accessibility issues
+4. **Reference the prototype** - `prototype-v6.html` is the source of truth
+5. **Mobile first** - Always check mobile layout
+6. **Neo-brutalist style** - Bold, imperfect, expressive

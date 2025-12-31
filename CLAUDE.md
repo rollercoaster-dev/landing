@@ -55,6 +55,7 @@ landing/
     ├── settings.json          # Team-shared settings
     ├── settings.local.json    # Personal settings (not committed)
     ├── WORKFLOW.md            # Development workflow
+    ├── commands/              # Slash commands (/work-on-issue, etc.)
     ├── agents/                # Custom agents
     ├── rules/                 # Behavioral rules
     ├── skills/                # Skill definitions
@@ -77,7 +78,15 @@ landing/
 
 ## Development Workflow
 
-### Common Commands
+### Slash Commands
+
+| Command | Purpose |
+| --- | --- |
+| `/work-on-issue <number>` | Full 3-gate workflow for GitHub issues |
+| `/implement-component <name>` | Quick component creation from prototype |
+| `/design-check [file]` | Pre-PR design and accessibility review |
+
+### Common Terminal Commands
 
 ```bash
 # Development
@@ -97,10 +106,12 @@ pnpm test              # Run tests
 
 ### Working on Components
 
-1. Reference `prototype-v6.html` for implementation details
-2. Follow Tailwind 4 patterns
-3. Use semantic HTML (accessibility first)
-4. Test on mobile viewport
+1. Use `/work-on-issue` for GitHub issues (full gated workflow)
+2. Use `/implement-component` for quick prototyping
+3. Reference `prototype-v6.html` for implementation details
+4. Follow Tailwind 4 patterns
+5. Use semantic HTML (accessibility first)
+6. Run `/design-check` before creating PRs
 
 ## Key Design Principles
 
