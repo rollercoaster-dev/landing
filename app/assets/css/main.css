@@ -1,1 +1,52 @@
 @import "tailwindcss";
+
+@theme {
+  /* Color Tokens - THE CLIMB */
+  --color-climb-bg: #ffe50c;
+  --color-climb-text: #0a0a0a;
+
+  /* Color Tokens - THE DROP */
+  --color-drop-bg: #0a0a0a;
+  --color-drop-bg-end: #1a1033;
+  --color-drop-text: #fafafa;
+  --color-drop-accent: #a78bfa;
+
+  /* Color Tokens - THE STORIES */
+  --color-stories-bg: #1a1033;
+  --color-stories-text: #fafafa;
+  --color-stories-accent-1: #00d4aa;
+  --color-stories-accent-2: #ff6b35;
+  --color-stories-accent-3: #a855f7;
+  --color-stories-accent-4: #38bdf8;
+
+  /* Color Tokens - THE RELIEF */
+  --color-relief-bg: #d4f4e7;
+  --color-relief-text: #0a0a0a;
+  --color-relief-accent: #059669;
+
+  /* Base Colors */
+  --color-white: #fafafa;
+  --color-black: #0a0a0a;
+
+  /* Font Families (fonts will be loaded in Commit 5) */
+  --font-headline: 'Anybody', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+  --font-body: 'Instrument Sans', system-ui, sans-serif;
+}
+
+/* Base Styles */
+html {
+  font-size: 18px;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-climb-bg);
+  color: var(--color-climb-text);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-drop-accent);
+  color: var(--color-white);
+}
