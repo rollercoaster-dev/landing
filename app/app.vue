@@ -46,6 +46,9 @@ import { stories, questions } from '~/data/content'
     <!-- Relief Section -->
     <ReliefSection />
 
+    <!-- Pause Section -->
+    <PauseSection />
+
     <!-- Badge Collection (client-side only for interactivity) -->
     <ClientOnly>
       <BadgeCollection />
