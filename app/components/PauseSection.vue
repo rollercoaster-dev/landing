@@ -27,14 +27,12 @@ onMounted(() => {
   }
 })
 
-// Handle input with debounce
-// @ts-expect-error - Event type from native input handler
-function handleInput(event) {
+// Watch for input changes with debounce (replaces @input handler)
+watch(inputValue, (newVal) => {
   if (!import.meta.client)
     return
 
-  const target = event.target
-  const val = target.value.trim()
+  const val = newVal.trim()
 
   // Clear existing timeout
   // @ts-ignore - saveTimeout is setTimeout ID
@@ -64,13 +62,31 @@ function handleInput(event) {
     localStorage.removeItem('rc-win')
     localStorage.removeItem('rc-date')
   }
-}
+})
 
-// Cleanup timeout on unmount
+// Cleanup timeout on unmount and flush pending saves
 onUnmounted(() => {
   // @ts-ignore - saveTimeout is setTimeout ID
   if (saveTimeout) {
     clearTimeout(saveTimeout)
+  }
+
+  // Flush pending value so user input isn't lost
+  if (!import.meta.client)
+    return
+
+  const pending = inputValue.value.trim()
+  if (pending) {
+    const now = new Date().toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+    })
+    badgeText.value = pending
+    badgeDate.value = now
+    showBadge.value = true
+    localStorage.setItem('rc-win', pending)
+    localStorage.setItem('rc-date', now)
   }
 })
 </script>
@@ -99,7 +115,6 @@ onUnmounted(() => {
         placeholder="even small things count..."
         maxlength="140"
         aria-label="What did you do today that mattered?"
-        @input="handleInput"
       >
 
       <!-- Badge Preview -->
