@@ -15,14 +15,14 @@
       </h2>
 
       <p
-        class="font-[family-name:var(--font-body)] font-normal text-[clamp(1.1rem,2vw,1.4rem)] leading-[2] text-white/60 mb-6"
+        class="font-[family-name:var(--font-body)] font-normal text-[clamp(1.1rem,2vw,1.4rem)] leading-[2] text-white/80 mb-6"
       >
         The projects scatter. The momentum disappears.
         You stop for a day, then a week, then you lose count.
       </p>
 
       <p
-        class="font-[family-name:var(--font-body)] font-normal text-[clamp(1.1rem,2vw,1.4rem)] leading-[2] text-white/60 mb-6"
+        class="font-[family-name:var(--font-body)] font-normal text-[clamp(1.1rem,2vw,1.4rem)] leading-[2] text-white/80 mb-6"
       >
         Most tools punish this.
       </p>
@@ -31,19 +31,19 @@
         <span class="mr-8">
           <span class="x text-[var(--color-drop-accent)] mr-1.5">×</span>
           <span
-            class="text text-white/50 line-through decoration-[var(--color-drop-accent)] decoration-1"
+            class="text text-white/70 line-through decoration-[var(--color-drop-accent)] decoration-1"
           >Streak broken</span>
         </span>
         <span class="mr-8">
           <span class="x text-[var(--color-drop-accent)] mr-1.5">×</span>
           <span
-            class="text text-white/50 line-through decoration-[var(--color-drop-accent)] decoration-1"
+            class="text text-white/70 line-through decoration-[var(--color-drop-accent)] decoration-1"
           >Progress lost</span>
         </span>
         <span class="mr-8">
           <span class="x text-[var(--color-drop-accent)] mr-1.5">×</span>
           <span
-            class="text text-white/50 line-through decoration-[var(--color-drop-accent)] decoration-1"
+            class="text text-white/70 line-through decoration-[var(--color-drop-accent)] decoration-1"
           >Start over</span>
         </span>
       </div>
@@ -55,7 +55,7 @@
       </p>
 
       <span
-        class="aside font-[family-name:var(--font-mono)] text-[0.7rem] text-white/30 mt-16 inline-block"
+        class="aside font-[family-name:var(--font-mono)] text-[0.7rem] text-white/60 mt-16 inline-block"
       >
         (still here? good.)
       </span>

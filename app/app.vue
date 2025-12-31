@@ -121,7 +121,7 @@ useSeoMeta({
 .stories-note {
   font-family: var(--font-mono);
   font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.5);
   margin-left: 0;
 }
 </style>
