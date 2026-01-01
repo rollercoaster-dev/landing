@@ -3,7 +3,7 @@
 // Dark gradient section with purple accent highlighting the drop
 
 const { $t } = useI18n()
-const punishList = computed(() => $t('drop.punishList', { returnObjects: true }) as string[])
+const punishList = computed(() => $t('drop.punishList') as string[])
 </script>
 
 <template>

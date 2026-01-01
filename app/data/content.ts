@@ -33,7 +33,7 @@ export function useStories() {
   const { $t } = useI18n()
 
   return computed<Story[]>(() => {
-    const data = $t('stories.list', { returnObjects: true })
+    const data = $t('stories.list')
     if (!Array.isArray(data)) {
       console.warn('stories.list translation is not an array')
       return []
@@ -52,7 +52,7 @@ export function useQuestions() {
   const { $t } = useI18n()
 
   return computed<Question[]>(() => {
-    const data = $t('questions.list', { returnObjects: true })
+    const data = $t('questions.list')
     if (!Array.isArray(data)) {
       console.warn('questions.list translation is not an array')
       return []

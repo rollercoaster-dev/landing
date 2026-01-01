@@ -4,7 +4,7 @@
 // Uses useFitText for dynamic responsive scaling
 
 const { $t } = useI18n()
-const lines = computed(() => $t('hero.lines', { returnObjects: true }) as string[])
+const lines = computed(() => $t('hero.lines') as string[])
 const { containerRef, lineRefs, fontSizes, fitText } = useFitText(lines.value, 20)
 
 // Recalculate font sizes when locale changes (different text lengths)

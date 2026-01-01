@@ -9,7 +9,7 @@ interface ValueItem {
 const { $t } = useI18n()
 
 const values = computed<ValueItem[]>(() => {
-  const data = $t('relief.values', { returnObjects: true })
+  const data = $t('relief.values')
   if (!Array.isArray(data)) return []
   return data as ValueItem[]
 })
