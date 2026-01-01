@@ -65,8 +65,9 @@
     "paragraphs": [
       "A different kind of tool. You create badges for the things you accomplish — big or small, formal or personal. You decide what counts.",
       "Everything you create? Yours — to keep, to share, to use however you choose.",
-      "Built on Open Badges — an open standard that means your credentials are portable, verifiable, and truly yours."
+      "an open standard that means your credentials are portable, verifiable, and truly yours."
     ],
+    "linkPrefix": "Built on",
     "values": [
       {
         "label": "Your pace",

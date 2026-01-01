@@ -39,7 +39,7 @@ const values = computed<ValueItem[]>(() => {
       </p>
 
       <p class="font-instrument-sans text-[1.15rem] leading-[1.85] text-[rgba(10,10,10,0.75)] mb-6">
-        Built on <a
+        {{ $t('relief.linkPrefix') }} <a
           href="https://openbadges.org"
           target="_blank"
           rel="noopener"

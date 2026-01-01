@@ -65,8 +65,9 @@
     "paragraphs": [
       "Ein anderes Tool. Du erstellst Badges für Dinge, die du erreicht hast — groß oder klein, formell oder persönlich. Du entscheidest, was zählt.",
       "Alles, was du erstellst? Deins — zum Behalten, Teilen, Nutzen wie du willst.",
-      "Basiert auf Open Badges — einem offenen Standard, der bedeutet, dass deine Nachweise portabel, verifizierbar und wirklich deine sind."
+      "einem offenen Standard, der bedeutet, dass deine Nachweise portabel, verifizierbar und wirklich deine sind."
     ],
+    "linkPrefix": "Basiert auf",
     "values": [
       {
         "label": "Dein Tempo",
