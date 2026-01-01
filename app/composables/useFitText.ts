@@ -5,9 +5,12 @@
 export function useFitText(lines: string[], baseFontVW = 15) {
   const containerRef = ref<HTMLElement>()
 
+  // SSR safety: ensure lines is an array (i18n may return string key during SSR)
+  const safeLines = Array.isArray(lines) ? lines : []
+
   // Create refs for each line
-  const lineRefs = lines.map(() => ref<HTMLElement>())
-  const fontSizes = lines.map(() => ref(`${baseFontVW}vw`))
+  const lineRefs = safeLines.map(() => ref<HTMLElement>())
+  const fontSizes = safeLines.map(() => ref(`${baseFontVW}vw`))
 
   function fitText() {
     if (!containerRef.value) return
