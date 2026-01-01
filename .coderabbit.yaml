@@ -1,0 +1,21 @@
+# CodeRabbit Configuration
+# https://docs.coderabbit.ai/guides/configure-coderabbit
+
+reviews:
+  # Only review on PR creation, not on every push
+  request_changes_workflow: false
+  high_level_summary: true
+  poem: true
+  review_status: true
+  collapse_walkthrough: false
+
+  # Skip draft PRs
+  drafts: false
+
+  # Only auto-review when PR is opened (not on subsequent pushes)
+  auto_review:
+    enabled: true
+    drafts: false
+
+# Limit when reviews are triggered
+early_access: false
