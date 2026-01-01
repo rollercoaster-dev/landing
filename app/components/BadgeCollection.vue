@@ -10,8 +10,10 @@ const localeMap: Record<string, string> = {
 // State
 const badgeSection = ref<HTMLElement | null>(null)
 const badges = ref({})
-const isInView = ref(false)
 const hasBadges = computed(() => Object.keys(badges.value).length > 0)
+
+// Store observer for cleanup
+let observer: IntersectionObserver | null = null
 
 // Load badges from useBadges composable
 function refreshBadges() {
@@ -25,39 +27,33 @@ onMounted(() => {
   refreshBadges()
 
   // Setup IntersectionObserver (client-only)
-  if (import.meta.client) {
-    if (badgeSection.value) {
-      const element = badgeSection.value
-      setTimeout(() => {
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                isInView.value = true
-                refreshBadges()
-              }
-              else {
-                const rect = entry.boundingClientRect
-                if (rect.bottom < 0 || rect.top > window.innerHeight) {
-                  isInView.value = false
-                }
-              }
-            })
-          },
-          {
-            threshold: 0,
-            rootMargin: '-40% 0px -40% 0px',
-          },
-        )
-
-        observer.observe(element)
-
-        onUnmounted(() => {
-          observer.disconnect()
-        })
-      }, 100)
-    }
+  if (import.meta.client && badgeSection.value) {
+    const element = badgeSection.value
+    // Delay to ensure initial render completes
+    setTimeout(() => {
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            // Refresh badges each time section enters viewport
+            // (user may have earned new badges while scrolling)
+            if (entry.isIntersecting) {
+              refreshBadges()
+            }
+          })
+        },
+        {
+          threshold: 0,
+          rootMargin: '-40% 0px -40% 0px',
+        },
+      )
+      observer.observe(element)
+    }, 100)
   }
+})
+
+// Cleanup observer on unmount
+onUnmounted(() => {
+  observer?.disconnect()
 })
 
 // Get translated badge name
