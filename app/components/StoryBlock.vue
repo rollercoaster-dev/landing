@@ -17,18 +17,13 @@ const props = defineProps({
     type: Number,
     required: true,
   },
-  desktopMarginLeft: {
-    type: String,
-    default: '0',
-  },
 })
 
 // Compute accent color CSS variable
 const accentColorVar = computed(() => `var(--color-stories-accent-${props.accentColor})`)
 
-// Compute container style with CSS custom property for desktop margin
+// Compute container style
 const containerStyle = computed(() => ({
-  '--desktop-margin-left': props.desktopMarginLeft,
   '--story-accent': accentColorVar.value,
 }))
 </script>
@@ -60,15 +55,7 @@ const containerStyle = computed(() => ({
 .story-block {
   position: relative;
   margin-bottom: 2rem;
-  padding: 4rem 0;
-  margin-left: 0; /* Mobile-first: no offset */
-}
-
-/* Desktop: apply staggered margins */
-@media (min-width: 1024px) {
-  .story-block {
-    margin-left: var(--desktop-margin-left, 0);
-  }
+  padding: 4rem 0 2rem 0;
 }
 
 /* Giant faded name background */

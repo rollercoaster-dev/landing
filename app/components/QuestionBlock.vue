@@ -13,14 +13,6 @@ const props = defineProps({
     type: Number,
     required: true,
   },
-  desktopSlideFrom: {
-    type: String,
-    required: true,
-  },
-  desktopMarginLeft: {
-    type: String,
-    default: '0',
-  },
 })
 
 // State
@@ -37,10 +29,8 @@ const storageKey = STORAGE_PREFIX + props.badgeKey
 // Compute accent color CSS variable
 const accentColorVar = computed(() => `var(--color-stories-accent-${props.accentColor})`)
 
-// Compute container style with CSS custom properties for desktop layout
+// Compute container style with CSS custom properties
 const containerStyle = computed(() => ({
-  '--desktop-margin-left': props.desktopMarginLeft,
-  '--desktop-slide-from': props.desktopSlideFrom,
   '--question-accent': accentColorVar.value,
 }))
 
@@ -176,16 +166,9 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   position: relative;
-  margin: 5rem 0 4rem;
+  margin: 0 0 12rem auto;
   max-width: 800px;
-  margin-left: 0; /* Mobile-first: no offset */
-}
-
-/* Desktop: apply margin from props */
-@media (min-width: 1024px) {
-  .question-block {
-    margin-left: var(--desktop-margin-left, 0);
-  }
+  text-align: right;
 }
 
 .question-text {
@@ -219,27 +202,14 @@ onUnmounted(() => {
   pointer-events: auto;
 }
 
-/* Desktop: side-by-side layout */
+/* Desktop: side-by-side layout - input always on LEFT */
 @media (min-width: 1024px) {
   .question-input-wrap {
     position: absolute;
     top: 50%;
-    margin-top: 0;
-    transform: translateY(-50%) translateX(20px);
-  }
-
-  /* Input on right side - slides in from left */
-  .question-block[style*="--desktop-slide-from:left"] .question-input-wrap {
-    left: 100%;
-    margin-left: 2rem;
-    transform: translateY(-50%) translateX(-20px);
-  }
-
-  /* Input on left side - slides in from right */
-  .question-block[style*="--desktop-slide-from:right"] .question-input-wrap {
     right: 100%;
-    left: auto;
     margin-right: 2rem;
+    margin-top: 0;
     transform: translateY(-50%) translateX(20px);
     text-align: right;
   }
