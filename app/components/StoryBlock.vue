@@ -119,6 +119,10 @@ const containerStyle = computed(() => ({
     margin-left: 0 !important;
   }
 
+  .story-name {
+    font-size: clamp(5rem, 22vw, 12rem);
+  }
+
   .story-content {
     margin-top: -2rem;
   }
