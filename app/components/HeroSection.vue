@@ -33,6 +33,11 @@ function getFontSize(index: number) {
     ref="containerRef"
     class="hero min-h-screen bg-[var(--color-climb-bg)] p-4 md:p-8 flex flex-col justify-center relative"
   >
+    <img
+      src="~/assets/RibbonRoller.svg"
+      alt="Rollercoaster.dev logo"
+      class="absolute top-4 right-4 md:top-8 md:right-8 w-16 h-16 md:w-[200px] md:h-[200px]"
+    />
     <h1
       class="font-[family-name:var(--font-headline)] font-[900] leading-[0.85] -tracking-[0.04em] uppercase text-[var(--color-climb-text)]"
     >
