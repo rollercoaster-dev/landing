@@ -28,7 +28,7 @@
           href="https://openbadges.org"
           target="_blank"
           rel="noopener"
-          class="text-[var(--color-relief-accent)] underline underline-offset-[4px] decoration-[var(--color-relief-accent)] decoration-[2px]"
+          class="text-[var(--color-relief-accent)] underline underline-offset-[4px] decoration-[var(--color-relief-accent)] decoration-[2px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--color-relief-accent)] focus-visible:outline-offset-2"
         >Open Badges</a> — an open standard that means your credentials are portable, verifiable, and truly yours.
       </p>
     </div>

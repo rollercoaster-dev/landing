@@ -103,9 +103,9 @@ onUnmounted(() => {
       </p>
 
       <!-- Question -->
-      <p class="pause-question">
+      <h2 class="pause-question">
         What did you do today that mattered?
-      </p>
+      </h2>
 
       <!-- Input -->
       <input

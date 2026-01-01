@@ -40,9 +40,9 @@ useSeoMeta({
       id="main"
       class="stories"
     >
-      <p class="stories-header">
+      <h2 class="stories-header">
         Who we're building for
-      </p>
+      </h2>
 
       <template
         v-for="(story, i) in stories"
@@ -121,7 +121,7 @@ useSeoMeta({
 .stories-note {
   font-family: var(--font-mono);
   font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.5);
   margin-left: 0;
 }
 </style>
