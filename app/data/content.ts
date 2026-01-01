@@ -15,8 +15,8 @@ export interface Question {
   text: string
   badgeKey: string
   accentColor: 1 | 2 | 3 | 4
-  slideFrom: 'left' | 'right'
-  marginLeft: string
+  desktopSlideFrom: 'left' | 'right'
+  desktopMarginLeft: string
 }
 
 export const stories: Story[] = [
@@ -55,29 +55,29 @@ export const questions: Question[] = [
     text: 'Do you have a quiet victory that deserves a mark?',
     badgeKey: 'quiet-victory',
     accentColor: 1,
-    slideFrom: 'left',
-    marginLeft: '0',
+    desktopSlideFrom: 'left',
+    desktopMarginLeft: '0',
   },
   {
     text: "What's one thread you could pull from something you started?",
     badgeKey: 'thread-finder',
     accentColor: 2,
-    slideFrom: 'right',
-    marginLeft: 'auto',
+    desktopSlideFrom: 'right',
+    desktopMarginLeft: 'auto',
   },
   {
     text: 'What skill have you been quietly building?',
     badgeKey: 'skill-builder',
     accentColor: 3,
-    slideFrom: 'left',
-    marginLeft: '5%',
+    desktopSlideFrom: 'left',
+    desktopMarginLeft: '5%',
   },
   {
     text: "Who could you teach what you've learned?",
     badgeKey: 'knowledge-sharer',
     accentColor: 4,
-    slideFrom: 'left', // Changed: input on right side (more room since question is at 15% from left)
-    marginLeft: '15%',
+    desktopSlideFrom: 'left',
+    desktopMarginLeft: '15%',
   },
 ]
 
