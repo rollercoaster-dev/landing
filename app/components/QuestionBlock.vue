@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const { t } = useI18n()
+
 // Props
 const props = defineProps({
   text: {
@@ -16,8 +18,8 @@ const props = defineProps({
 })
 
 // State
-const questionBlock = ref <HTMLElement | null> (null)
-const inputElement = ref <HTMLInputElement | null> (null)
+const questionBlock = ref<HTMLElement | null>(null)
+const inputElement = ref<HTMLInputElement | null>(null)
 const inputValue = ref('')
 const showSaved = ref(false)
 const isInView = ref(false)
@@ -58,7 +60,7 @@ onMounted(() => {
                 isInView.value = true
               }
               else {
-              // Only remove if scrolled well past (not just partially out)
+                // Only remove if scrolled well past (not just partially out)
                 const rect = entry.boundingClientRect
                 if (rect.bottom < 0 || rect.top > window.innerHeight) {
                   isInView.value = false
@@ -129,11 +131,10 @@ onUnmounted(() => {
 
 <template>
   <div
-    ref="questionBlock"
-    class="question-block"
-    :class="{ 'in-view': isInView }"
-    :style="containerStyle"
-  >
+       ref="questionBlock"
+       class="question-block"
+       :class="{ 'in-view': isInView }"
+       :style="containerStyle">
     <!-- Question Text -->
     <p class="question-text">
       {{ text }}
@@ -142,20 +143,18 @@ onUnmounted(() => {
     <!-- Input Wrapper (slides in from side) -->
     <div class="question-input-wrap">
       <input
-        ref="inputElement"
-        v-model="inputValue"
-        type="text"
-        class="question-input"
-        :placeholder="$t('questions.placeholder')"
-        maxlength="200"
-        :aria-label="text"
-        @input="handleInput"
-      >
+             ref="inputElement"
+             v-model="inputValue"
+             type="text"
+             class="question-input"
+             :placeholder="t('questions.placeholder')"
+             maxlength="200"
+             :aria-label="text"
+             @input="handleInput">
       <p
-        class="question-saved"
-        :class="{ visible: showSaved }"
-      >
-        {{ $t('questions.noted') }}
+         class="question-saved"
+         :class="{ visible: showSaved }">
+        {{ t('questions.noted') }}
       </p>
     </div>
   </div>
@@ -220,7 +219,8 @@ onUnmounted(() => {
 }
 
 .question-input {
-  width: 100%; /* Mobile-first: full width */
+  width: 100%;
+  /* Mobile-first: full width */
   padding: 1rem 1.2rem;
   font-family: var(--font-mono);
   font-size: 1rem;
@@ -266,6 +266,7 @@ onUnmounted(() => {
 
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
+
   .question-text,
   .question-input-wrap,
   .question-saved {

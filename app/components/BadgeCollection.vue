@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { $t, $getLocale } = useI18n()
+const { t, locale } = useI18n()
 
 // Map locale codes to BCP 47 language tags for date formatting
 const localeMap: Record<string, string> = {
@@ -59,7 +59,7 @@ onUnmounted(() => {
 // Get translated badge name
 function getBadgeName(badgeKey: string): string {
   // Use the translation key from badges.names
-  return $t(`badges.names.${badgeKey}`)
+  return t(`badges.names.${badgeKey}`) as string
 }
 
 // Get badge accent color based on badge key
@@ -80,32 +80,30 @@ function getBadgeAccent(badgeKey) {
 // Get current date in locale-aware format
 const getCurrentDate = () => {
   const now = new Date()
-  const locale = localeMap[$getLocale()] || 'en-US'
-  return now.toLocaleDateString(locale, { month: 'short', day: 'numeric', year: 'numeric' })
+  const localeCode = localeMap[locale.value] || 'en-US'
+  return now.toLocaleDateString(localeCode, { month: 'short', day: 'numeric', year: 'numeric' })
 }
 </script>
 
 <template>
   <section
-    v-if="hasBadges"
-    ref="badgeSection"
-    class="badges-section"
-  >
+           v-if="hasBadges"
+           ref="badgeSection"
+           class="badges-section">
     <div class="badges-content">
       <h2 class="badges-heading">
-        {{ $t('badges.heading') }}
+        {{ t('badges.heading') }}
       </h2>
       <p class="badges-intro">
-        {{ $t('badges.intro') }}
+        {{ t('badges.intro') }}
       </p>
       <div class="badges-grid">
         <div
-          v-for="(answer, badgeKey) in badges"
-          :key="badgeKey"
-          class="badge-card"
-          :data-badge="badgeKey"
-          :style="{ '--badge-accent': getBadgeAccent(String(badgeKey)) }"
-        >
+             v-for="(answer, badgeKey) in badges"
+             :key="badgeKey"
+             class="badge-card"
+             :data-badge="badgeKey"
+             :style="{ '--badge-accent': getBadgeAccent(String(badgeKey)) }">
           <p class="badge-name">
             {{ getBadgeName(String(badgeKey)) }}
           </p>

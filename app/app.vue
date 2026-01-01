@@ -1,24 +1,24 @@
 <script setup lang="ts">
 import { useStories, useQuestions } from '~/data/content'
 
-const { $t } = useI18n()
+const { t } = useI18n()
 const stories = useStories()
 const questions = useQuestions()
 
 useSeoMeta({
-  title: () => $t('meta.title'),
-  description: () => $t('meta.description'),
-  ogTitle: () => $t('meta.title'),
-  ogDescription: () => $t('meta.description'),
+  title: () => t('meta.title'),
+  description: () => t('meta.description'),
+  ogTitle: () => t('meta.title'),
+  ogDescription: () => t('meta.description'),
   ogUrl: 'https://rollercoaster.dev',
   ogType: 'website',
   ogImage: 'https://rollercoaster.dev/og-image.png',
-  ogImageAlt: () => $t('meta.ogImageAlt'),
+  ogImageAlt: () => t('meta.ogImageAlt'),
   twitterCard: 'summary_large_image',
-  twitterTitle: () => $t('meta.title'),
-  twitterDescription: () => $t('meta.description'),
+  twitterTitle: () => t('meta.title'),
+  twitterDescription: () => t('meta.description'),
   twitterImage: 'https://rollercoaster.dev/og-image.png',
-  twitterImageAlt: () => $t('meta.ogImageAlt'),
+  twitterImageAlt: () => t('meta.ogImageAlt'),
   themeColor: '#ffe50c',
 })
 </script>
@@ -29,9 +29,8 @@ useSeoMeta({
 
     <!-- Skip to main content (accessibility) -->
     <a
-      href="#main"
-      class="skip-link"
-    >{{ $t('skipLink') }}</a>
+       href="#main"
+       class="skip-link">{{ t('skipLink') }}</a>
 
     <!-- Hero Section -->
     <HeroSection />
@@ -41,26 +40,23 @@ useSeoMeta({
 
     <!-- Stories Section -->
     <section
-      id="main"
-      class="stories"
-    >
+             id="main"
+             class="stories">
       <h2 class="stories-header">
-        {{ $t('stories.header') }}
+        {{ t('stories.header') }}
       </h2>
 
       <template
-        v-for="(story, i) in stories"
-        :key="story.name"
-      >
+                v-for="(story, i) in stories"
+                :key="story.name">
         <StoryBlock v-bind="story" />
         <QuestionBlock
-          v-if="questions[i]"
-          v-bind="questions[i]"
-        />
+                       v-if="questions[i]"
+                       v-bind="questions[i]" />
       </template>
 
       <p class="stories-note">
-        {{ $t('stories.note') }}
+        {{ t('stories.note') }}
       </p>
     </section>
 
