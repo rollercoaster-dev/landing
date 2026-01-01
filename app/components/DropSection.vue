@@ -34,19 +34,19 @@ const punishList = computed(() => {
           <span class="x text-[var(--color-drop-accent)] mr-1.5">×</span>
           <span
                 class="text text-white/70 line-through decoration-[var(--color-drop-accent)] decoration-1">{{
-            punishList[0] }}</span>
+                  punishList[0] }}</span>
         </span>
         <span class="whitespace-nowrap inline-block -rotate-1">
           <span class="x text-[var(--color-drop-accent)] mr-1.5">×</span>
           <span
                 class="text text-white/70 line-through decoration-[var(--color-drop-accent)] decoration-1">{{
-            punishList[1] }}</span>
+                  punishList[1] }}</span>
         </span>
         <span class="whitespace-nowrap inline-block rotate-1">
           <span class="x text-[var(--color-drop-accent)] mr-1.5">×</span>
           <span
                 class="text text-white/70 line-through decoration-[var(--color-drop-accent)] decoration-1">{{
-            punishList[2] }}</span>
+                  punishList[2] }}</span>
         </span>
       </div>
 
