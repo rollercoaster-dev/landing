@@ -169,7 +169,6 @@ onUnmounted(() => {
   margin: 0 0 12rem auto;
   max-width: 800px;
   text-align: right;
-  
 }
 
 .question-text {
@@ -181,13 +180,6 @@ onUnmounted(() => {
   text-transform: uppercase;
   letter-spacing: -0.03em;
   transition: color 0.3s;
-}
-
-/* Desktop: right-aligned text */
-@media (min-width: 1024px) {
-  .question-text {
-    text-align: right;
-  }
 }
 
 .question-block.in-view .question-text {
