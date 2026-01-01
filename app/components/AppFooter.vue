@@ -7,7 +7,7 @@
   <footer class="bg-black text-white px-8 py-16">
     <div class="max-w-6xl mx-auto">
       <!-- Top row: Links and Language Switcher -->
-      <div class="flex justify-between items-start flex-wrap gap-8 mb-8">
+      <div class="flex justify-between items-start gap-8 mb-8 flex-col md:flex-row">
         <!-- Left: Links -->
         <div class="flex gap-10">
           <a

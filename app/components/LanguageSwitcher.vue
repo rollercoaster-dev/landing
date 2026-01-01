@@ -40,7 +40,7 @@ function switchLocale(code: string) {
   font-family: var(--font-mono);
   font-size: 0.875rem;
   font-weight: 700;
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1.25rem;
   background: transparent;
   border: 2px solid currentColor;
   color: var(--color-white);
@@ -50,14 +50,24 @@ function switchLocale(code: string) {
 }
 
 .lang-button:hover,
-.lang-button:focus {
+.lang-button:focus-visible {
   background: var(--color-white);
   color: #000;
-  outline: 2px solid var(--color-white);
+  outline: 2px solid #000;
   outline-offset: 2px;
 }
 
 .lang-button:active {
   transform: translateY(2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lang-button {
+    transition: none;
+  }
+
+  .lang-button:active {
+    transform: none;
+  }
 }
 </style>
