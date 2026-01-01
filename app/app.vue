@@ -127,20 +127,8 @@ useSeoMeta({
   margin-left: 0;
 }
 
-/* Story-Question Grid (desktop side-by-side) */
+/* Story-Question container - stacked layout */
 .story-question-grid {
-  /* Mobile-first: stacked layout (no grid) */
   display: block;
-}
-
-/* Desktop: side-by-side grid */
-@media (min-width: 1024px) {
-  .story-question-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* 50/50 split */
-    gap: 4rem 6rem; /* vertical / horizontal gap */
-    align-items: start;
-    overflow: visible; /* Allow story watermarks to overflow left */
-  }
 }
 </style>

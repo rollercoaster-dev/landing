@@ -55,7 +55,7 @@ const containerStyle = computed(() => ({
 .story-block {
   position: relative;
   margin-bottom: 2rem;
-  padding: 4rem 0;
+  padding: 4rem 0 2rem 0;
 }
 
 /* Giant faded name background */

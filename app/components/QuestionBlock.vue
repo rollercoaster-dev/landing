@@ -166,9 +166,17 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   position: relative;
-  margin: 5rem 0 4rem;
+  margin: 0 0 12rem;
   max-width: 800px;
   margin-left: 0; /* Mobile-first: no offset */
+}
+
+/* Desktop: push question to right side */
+@media (min-width: 1024px) {
+  .question-block {
+    margin-left: auto;
+    margin-right: 0;
+  }
 }
 
 .question-text {
