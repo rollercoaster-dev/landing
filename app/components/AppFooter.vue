@@ -14,23 +14,23 @@
           rel="noopener noreferrer"
           class="font-mono text-[0.85rem] uppercase tracking-[0.1em] text-white/50 no-underline transition-colors duration-200 hover:text-[var(--color-climb-bg)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--color-climb-bg)] focus-visible:outline-offset-2"
         >
-          GitHub
+          {{ $t('footer.links.github') }}
         </a>
         <a
           href="mailto:hello@rollercoaster.dev"
           class="font-mono text-[0.85rem] uppercase tracking-[0.1em] text-white/50 no-underline transition-colors duration-200 hover:text-[var(--color-climb-bg)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--color-climb-bg)] focus-visible:outline-offset-2"
         >
-          Contact
+          {{ $t('footer.links.contact') }}
         </a>
       </div>
 
       <!-- Right: Sign-off -->
       <div class="text-right">
         <p class="font-headline font-bold text-[1.3rem] uppercase text-white">
-          See you next ride.
+          {{ $t('footer.signOff') }}
         </p>
         <p class="font-mono text-[0.7rem] text-white/30 mt-2">
-          (or don't — we'll be here)
+          {{ $t('footer.aside') }}
         </p>
       </div>
     </div>

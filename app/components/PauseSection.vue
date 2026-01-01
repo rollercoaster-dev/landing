@@ -99,12 +99,12 @@ onUnmounted(() => {
         class="returning"
         :class="{ visible: isReturning }"
       >
-        // you came back
+        {{ $t('pause.returningMessage') }}
       </p>
 
       <!-- Question -->
       <h2 class="pause-question">
-        What did you do today that mattered?
+        {{ $t('pause.question') }}
       </h2>
 
       <!-- Input -->
@@ -112,9 +112,9 @@ onUnmounted(() => {
         v-model="inputValue"
         type="text"
         class="pause-input"
-        placeholder="even small things count..."
+        :placeholder="$t('pause.placeholder')"
         maxlength="140"
-        aria-label="What did you do today that mattered?"
+        :aria-label="$t('pause.question')"
       >
 
       <!-- Badge Preview -->
@@ -123,7 +123,7 @@ onUnmounted(() => {
         :class="{ visible: showBadge }"
       >
         <div class="badge-label">
-          // you showed up
+          {{ $t('pause.badgeLabel') }}
         </div>
         <div class="badge-text">
           {{ badgeText }}
@@ -132,7 +132,7 @@ onUnmounted(() => {
           {{ badgeDate }}
         </div>
         <div class="badge-response">
-          noted.
+          {{ $t('pause.badgeResponse') }}
         </div>
       </div>
     </div>
