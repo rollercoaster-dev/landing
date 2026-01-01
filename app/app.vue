@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { stories, questions } from '~/data/content'
+import { useStories, useQuestions } from '~/data/content'
 
 const { t } = useI18n()
+const stories = useStories()
+const questions = useQuestions()
 
 useSeoMeta({
   title: () => t('meta.title'),
