@@ -42,7 +42,7 @@ export const stories: Story[] = [
     marginLeft: '5%',
   },
   {
-    name: 'Carmen & Kayla',
+    name: 'Carmen',
     title: 'Passing it on',
     text: "After a full season of raised beds, Carmen made herself a badge — her own record of what she'd learned. Then she mentored Kayla, a 16-year-old who wanted to grow vegetables for her family. When Kayla finished her first bed, she made her own badge. Carmen verified it. Two other gardeners in the network approved it. Now Kayla has proof of something she built — and Carmen sees her knowledge rippling forward.",
     accentColor: 4,
