@@ -10,6 +10,15 @@ export default withNuxt(
       parser: tseslint.parser,
     },
   },
+  // Ensure Vue files use TypeScript parser for script blocks
+  {
+    files: ['**/*.vue'],
+    languageOptions: {
+      parserOptions: {
+        parser: tseslint.parser,
+      },
+    },
+  },
   // Prettier compatibility: allow double quotes when string contains apostrophes
   {
     rules: {

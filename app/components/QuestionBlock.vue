@@ -24,8 +24,8 @@ const props = defineProps({
 })
 
 // State
-const questionBlock = ref < HTMLElement | null > (null)
-const inputElement = ref < HTMLInputElement | null > (null)
+const questionBlock = ref <HTMLElement | null> (null)
+const inputElement = ref <HTMLInputElement | null> (null)
 const inputValue = ref('')
 const showSaved = ref(false)
 const isInView = ref(false)
@@ -259,8 +259,8 @@ onUnmounted(() => {
   opacity: 1;
 }
 
-/* Mobile — input slides up from bottom */
-@media (max-width: 900px) {
+/* Tablet/Mobile — input slides up from bottom */
+@media (max-width: 1200px) {
   .question-block {
     display: flex;
     flex-direction: column;
@@ -304,7 +304,7 @@ onUnmounted(() => {
     transform: translateY(-50%) translateX(0);
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 1200px) {
     .question-block.in-view .question-input-wrap {
       transform: translateY(0);
     }
