@@ -2,8 +2,12 @@
 // DropSection - The Drop
 // Dark gradient section with purple accent highlighting the drop
 
-const { t, tm } = useI18n()
-const punishList = computed(() => tm('drop.punishList') as string[])
+const { t, tm, rt } = useI18n()
+const punishList = computed(() => {
+  const messages = tm('drop.punishList') as unknown[]
+  if (!Array.isArray(messages)) return []
+  return messages.map((msg: unknown) => rt(msg as string))
+})
 </script>
 
 <template>

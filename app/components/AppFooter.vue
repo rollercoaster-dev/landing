@@ -21,7 +21,7 @@ const { t } = useI18n()
           </a>
           <a
              href="mailto:hello@rollercoaster.dev"
-             class="font-mono text-[0.85rem] uppercase tracking-[0.1em] text-white/50 no-underline transition-colors duration-200 hover:text-[var(--color-climb-bg)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--color-climb-bg)] focus-visible:outline-offset-2">
+             class="font-mono text-[0.85rem] uppercase tracking-[0.1em] text-white/50 no-underline transition-colors duration-200 hover:text-[var(--color-climb-bg)] focus-visible:outline focus-visible:outline-[var(--color-climb-bg)] focus-visible:outline-offset-2">
             {{ t('footer.links.contact') }}
           </a>
         </div>

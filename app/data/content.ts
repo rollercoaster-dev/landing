@@ -35,16 +35,18 @@ const QUESTION_BADGE_KEYS = [
  * Get translated stories with runtime validation
  */
 export function useStories() {
-  const { tm } = useI18n()
+  const { tm, rt } = useI18n()
 
   return computed<Story[]>(() => {
-    const data = tm('stories.list')
-    if (!Array.isArray(data)) {
+    const messages = tm('stories.list') as unknown[]
+    if (!Array.isArray(messages)) {
       console.warn('stories.list translation is not an array')
       return []
     }
-    return (data as RawStory[]).map((story, i) => ({
-      ...story,
+    return messages.map((msg: { name: string; title: string; text: string }, i) => ({
+      name: rt(msg.name),
+      title: rt(msg.title),
+      text: rt(msg.text),
       accentColor: ((i % 4) + 1) as 1 | 2 | 3 | 4,
     }))
   })
@@ -54,17 +56,17 @@ export function useStories() {
  * Get translated questions with runtime validation
  */
 export function useQuestions() {
-  const { tm } = useI18n()
+  const { tm, rt } = useI18n()
 
   return computed<Question[]>(() => {
-    const data = tm('questions.list')
-    if (!Array.isArray(data)) {
+    const messages = tm('questions.list') as unknown[]
+    if (!Array.isArray(messages)) {
       console.warn('questions.list translation is not an array')
       return []
     }
     // Only map questions that have corresponding badge keys
-    return (data as string[]).slice(0, QUESTION_BADGE_KEYS.length).map((text, i) => ({
-      text,
+    return messages.slice(0, QUESTION_BADGE_KEYS.length).map((msg: unknown, i) => ({
+      text: rt(msg as string),
       badgeKey: QUESTION_BADGE_KEYS[i],
       accentColor: ((i % 4) + 1) as 1 | 2 | 3 | 4,
     }))

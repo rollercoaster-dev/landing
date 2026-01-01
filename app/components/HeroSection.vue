@@ -3,8 +3,12 @@
 // Full viewport with massive typography and neo-brutalist indentation
 // Uses useFitText for dynamic responsive scaling
 
-const { t, tm } = useI18n()
-const lines = computed(() => tm('hero.lines') as string[])
+const { t, tm, rt } = useI18n()
+const lines = computed(() => {
+  const messages = tm('hero.lines') as unknown[]
+  if (!Array.isArray(messages)) return []
+  return messages.map((msg: unknown) => rt(msg as string))
+})
 const { containerRef, lineRefs, fontSizes, fitText } = useFitText(lines.value, 20)
 
 // Recalculate font sizes when locale changes (different text lengths)

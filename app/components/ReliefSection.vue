@@ -6,12 +6,15 @@ interface ValueItem {
   separator: string
 }
 
-const { t, tm } = useI18n()
+const { t, tm, rt } = useI18n()
 
 const values = computed<ValueItem[]>(() => {
-  const data = tm('relief.values')
-  if (!Array.isArray(data)) return []
-  return data as ValueItem[]
+  const messages = tm('relief.values') as Array<{ label: string; separator?: string }>
+  if (!Array.isArray(messages)) return []
+  return messages.map(msg => ({
+    label: rt(msg.label as unknown as Parameters<typeof rt>[0]),
+    separator: msg.separator ? rt(msg.separator as unknown as Parameters<typeof rt>[0]) : '',
+  }))
 })
 </script>
 
