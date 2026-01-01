@@ -1,8 +1,18 @@
 <script setup lang="ts">
 // Relief section with platform explanation
 
+interface ValueItem {
+  label: string
+  separator: string
+}
+
 const { $t } = useI18n()
-const values = computed(() => $t('relief.values', { returnObjects: true }) as Array<{ label: string, separator: string }>)
+
+const values = computed<ValueItem[]>(() => {
+  const data = $t('relief.values', { returnObjects: true })
+  if (!Array.isArray(data)) return []
+  return data as ValueItem[]
+})
 </script>
 
 <template>
@@ -21,7 +31,7 @@ const values = computed(() => $t('relief.values', { returnObjects: true }) as Ar
           v-for="(value, index) in values"
           :key="index"
           class="value font-semibold"
-        >{{ value.label }}{{ value.separator ? ' · ' : '' }}</span>
+        >{{ value.label }}{{ value.separator ? ` ${value.separator} ` : '' }}</span>
       </div>
 
       <p class="font-instrument-sans text-[1.15rem] leading-[1.85] text-[rgba(10,10,10,0.75)] mb-6">

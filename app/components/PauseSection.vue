@@ -1,4 +1,22 @@
 <script setup lang="ts">
+const { $getLocale } = useI18n()
+
+// Map locale codes to BCP 47 language tags for date formatting
+const localeMap: Record<string, string> = {
+  en: 'en-US',
+  de: 'de-DE',
+}
+
+// Get locale-aware date string
+const getFormattedDate = () => {
+  const locale = localeMap[$getLocale()] || 'en-US'
+  return new Date().toLocaleDateString(locale, {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  })
+}
+
 // State
 const inputValue = ref('')
 const showBadge = ref(false)
@@ -44,11 +62,7 @@ watch(inputValue, (newVal) => {
     // Debounce save for 400ms
     // @ts-ignore - saveTimeout stores setTimeout ID
     saveTimeout = setTimeout(() => {
-      const now = new Date().toLocaleDateString('en-US', {
-        month: 'short',
-        day: 'numeric',
-        year: 'numeric',
-      })
+      const now = getFormattedDate()
       badgeText.value = val
       badgeDate.value = now
       showBadge.value = true
@@ -77,11 +91,7 @@ onUnmounted(() => {
 
   const pending = inputValue.value.trim()
   if (pending) {
-    const now = new Date().toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric',
-    })
+    const now = getFormattedDate()
     badgeText.value = pending
     badgeDate.value = now
     showBadge.value = true

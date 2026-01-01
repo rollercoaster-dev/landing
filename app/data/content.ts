@@ -16,39 +16,56 @@ export interface Question {
   accentColor: 1 | 2 | 3 | 4
 }
 
+// Raw story from translation (without accentColor)
+interface RawStory {
+  name: string
+  title: string
+  text: string
+}
+
+// Badge keys mapped to question indices
+const QUESTION_BADGE_KEYS = ['quiet-victory', 'thread-finder', 'skill-builder', 'knowledge-sharer'] as const
+
 /**
- * Get translated stories
+ * Get translated stories with runtime validation
  */
 export function useStories() {
   const { $t } = useI18n()
 
-  return computed<Story[]>(() =>
-    ($t('stories.list', { returnObjects: true }) as any[]).map((story, i) => ({
+  return computed<Story[]>(() => {
+    const data = $t('stories.list', { returnObjects: true })
+    if (!Array.isArray(data)) {
+      console.warn('stories.list translation is not an array')
+      return []
+    }
+    return (data as RawStory[]).map((story, i) => ({
       ...story,
-      accentColor: (i % 4 + 1) as 1 | 2 | 3 | 4,
-    })),
-  )
+      accentColor: ((i % 4) + 1) as 1 | 2 | 3 | 4,
+    }))
+  })
 }
 
 /**
- * Get translated questions
+ * Get translated questions with runtime validation
  */
 export function useQuestions() {
   const { $t } = useI18n()
 
-  const questionTexts = computed(() =>
-    $t('questions.list', { returnObjects: true }) as string[],
-  )
-
-  const badgeKeys = ['quiet-victory', 'thread-finder', 'skill-builder', 'knowledge-sharer']
-
-  return computed<Question[]>(() =>
-    questionTexts.value.map((text, i) => ({
-      text,
-      badgeKey: badgeKeys[i],
-      accentColor: (i % 4 + 1) as 1 | 2 | 3 | 4,
-    })),
-  )
+  return computed<Question[]>(() => {
+    const data = $t('questions.list', { returnObjects: true })
+    if (!Array.isArray(data)) {
+      console.warn('questions.list translation is not an array')
+      return []
+    }
+    // Only map questions that have corresponding badge keys
+    return (data as string[])
+      .slice(0, QUESTION_BADGE_KEYS.length)
+      .map((text, i) => ({
+        text,
+        badgeKey: QUESTION_BADGE_KEYS[i],
+        accentColor: ((i % 4) + 1) as 1 | 2 | 3 | 4,
+      }))
+  })
 }
 
 /**

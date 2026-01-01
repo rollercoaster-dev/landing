@@ -106,6 +106,10 @@
       "github": "GitHub",
       "contact": "Kontakt"
     },
+    "languageSwitcher": {
+      "label": "Sprachauswahl",
+      "switchTo": "Zu {language} wechseln"
+    },
     "signOff": "Bis zur nächsten Fahrt.",
     "aside": "(oder nicht — wir sind hier)"
   }

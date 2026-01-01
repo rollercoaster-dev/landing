@@ -1,5 +1,11 @@
 <script setup lang="ts">
-const { $t } = useI18n()
+const { $t, $getLocale } = useI18n()
+
+// Map locale codes to BCP 47 language tags for date formatting
+const localeMap: Record<string, string> = {
+  en: 'en-US',
+  de: 'de-DE',
+}
 
 // State
 const badges = ref({})
@@ -32,10 +38,11 @@ function getBadgeAccent(badgeKey) {
   return 'var(--color-stories-accent-1)'
 }
 
-// Get current date in short format
+// Get current date in locale-aware format
 const getCurrentDate = () => {
   const now = new Date()
-  return now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+  const locale = localeMap[$getLocale()] || 'en-US'
+  return now.toLocaleDateString(locale, { month: 'short', day: 'numeric', year: 'numeric' })
 }
 </script>
 
