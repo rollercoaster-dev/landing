@@ -2,7 +2,7 @@
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineNuxtConfig({
-  modules: ['@nuxt/eslint', '@nuxtjs/seo', '@nuxtjs/i18n'],
+  modules: ['@nuxt/eslint', '@nuxtjs/seo', '@nuxtjs/i18n', 'nuxt-og-image'],
   devtools: { enabled: true },
 
   app: {
@@ -61,5 +61,25 @@ export default defineNuxtConfig({
     compilation: {
       strictMessage: false, // Allow HTML in translations
     },
+  },
+
+  ogImage: {
+    fonts: [
+      {
+        name: 'Anybody',
+        weight: 900,
+        path: '/fonts/anybody-900.woff',
+      },
+      {
+        name: 'Anybody',
+        weight: 700,
+        path: '/fonts/anybody-700.woff',
+      },
+      {
+        name: 'DM Mono',
+        weight: 400,
+        path: '/fonts/dm-mono-400.woff',
+      },
+    ],
   },
 })

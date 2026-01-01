@@ -12,14 +12,18 @@ useSeoMeta({
   ogDescription: () => t('meta.description'),
   ogUrl: 'https://rollercoaster.dev',
   ogType: 'website',
-  ogImage: 'https://rollercoaster.dev/og-image.png',
   ogImageAlt: () => t('meta.ogImageAlt'),
   twitterCard: 'summary_large_image',
   twitterTitle: () => t('meta.title'),
   twitterDescription: () => t('meta.description'),
-  twitterImage: 'https://rollercoaster.dev/og-image.png',
   twitterImageAlt: () => t('meta.ogImageAlt'),
   themeColor: '#ffe50c',
+})
+
+// Dynamic OG Image
+defineOgImage({
+  component: 'OgImageDefault',
+  description: t('meta.description'),
 })
 </script>
 
