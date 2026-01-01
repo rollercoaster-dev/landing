@@ -7,54 +7,9 @@ const localeMap: Record<string, string> = {
   de: 'de-DE',
 }
 
-// State
-const badgeSection = ref<HTMLElement | null>(null)
-const badges = ref({})
+// Get reactive badges from store
+const { badges } = useBadges()
 const hasBadges = computed(() => Object.keys(badges.value).length > 0)
-
-// Store observer for cleanup
-let observer: IntersectionObserver | null = null
-
-// Load badges from useBadges composable
-function refreshBadges() {
-  const { getAllBadges } = useBadges()
-  badges.value = getAllBadges()
-}
-
-// Load badges on mount and setup IntersectionObserver
-onMounted(() => {
-  // Initial load
-  refreshBadges()
-
-  // Setup IntersectionObserver (client-only)
-  if (import.meta.client && badgeSection.value) {
-    const element = badgeSection.value
-    // Delay to ensure initial render completes
-    setTimeout(() => {
-      observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            // Refresh badges each time section enters viewport
-            // (user may have earned new badges while scrolling)
-            if (entry.isIntersecting) {
-              refreshBadges()
-            }
-          })
-        },
-        {
-          threshold: 0,
-          rootMargin: '-40% 0px -40% 0px',
-        },
-      )
-      observer.observe(element)
-    }, 100)
-  }
-})
-
-// Cleanup observer on unmount
-onUnmounted(() => {
-  observer?.disconnect()
-})
 
 // Get translated badge name
 function getBadgeName(badgeKey: string): string {
@@ -72,6 +27,7 @@ function getBadgeAccent(badgeKey) {
   if (key === 'thread-finder') return 'var(--color-stories-accent-2)'
   if (key === 'skill-builder') return 'var(--color-stories-accent-3)'
   if (key === 'knowledge-sharer') return 'var(--color-stories-accent-4)'
+  if (key === 'daily-win') return 'var(--color-relief-accent)'
 
   // Default fallback
   return 'var(--color-stories-accent-1)'
@@ -88,7 +44,6 @@ const getCurrentDate = () => {
 <template>
   <section
            v-if="hasBadges"
-           ref="badgeSection"
            class="badges-section">
     <div class="badges-content">
       <h2 class="badges-heading">

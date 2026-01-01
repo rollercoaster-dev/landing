@@ -1,6 +1,10 @@
 <script setup lang="ts">
 const { t, locale } = useI18n()
 
+// Badge store
+const { saveBadge, loadBadge, removeBadge } = useBadges()
+const BADGE_KEY = 'daily-win'
+
 // Map locale codes to BCP 47 language tags for date formatting
 const localeMap: Record<string, string> = {
   en: 'en-US',
@@ -24,16 +28,15 @@ const isReturning = ref(false)
 const badgeText = ref('')
 const badgeDate = ref('')
 
-// Debounce timeout (setTimeout ID)
-// @ts-ignore - initialized as null, assigned setTimeout ID later
-let saveTimeout = null
+// Debounce timeout
+let saveTimeout: ReturnType<typeof setTimeout> | null = null
 
 // Load saved data on mount (client-only)
 onMounted(() => {
   if (!import.meta.client)
     return
 
-  const saved = localStorage.getItem('rc-win')
+  const saved = loadBadge(BADGE_KEY)
   const savedDate = localStorage.getItem('rc-date')
 
   if (saved) {
@@ -53,34 +56,31 @@ watch(inputValue, (newVal) => {
   const val = newVal.trim()
 
   // Clear existing timeout
-  // @ts-ignore - saveTimeout is setTimeout ID
   if (saveTimeout) {
     clearTimeout(saveTimeout)
   }
 
   if (val) {
     // Debounce save for 400ms
-    // @ts-ignore - saveTimeout stores setTimeout ID
     saveTimeout = setTimeout(() => {
       const now = getFormattedDate()
       badgeText.value = val
       badgeDate.value = now
       showBadge.value = true
-      localStorage.setItem('rc-win', val)
+      saveBadge(BADGE_KEY, val)
       localStorage.setItem('rc-date', now)
     }, 400)
   }
   else {
-    // Remove from localStorage if empty
+    // Remove badge if empty
     showBadge.value = false
-    localStorage.removeItem('rc-win')
+    removeBadge(BADGE_KEY)
     localStorage.removeItem('rc-date')
   }
 })
 
 // Cleanup timeout on unmount and flush pending saves
 onUnmounted(() => {
-  // @ts-ignore - saveTimeout is setTimeout ID
   if (saveTimeout) {
     clearTimeout(saveTimeout)
   }
@@ -95,7 +95,7 @@ onUnmounted(() => {
     badgeText.value = pending
     badgeDate.value = now
     showBadge.value = true
-    localStorage.setItem('rc-win', pending)
+    saveBadge(BADGE_KEY, pending)
     localStorage.setItem('rc-date', now)
   }
 })

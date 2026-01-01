@@ -17,16 +17,15 @@ const props = defineProps({
   },
 })
 
+// Badge store
+const { saveBadge, loadBadge, removeBadge } = useBadges()
+
 // State
 const questionBlock = ref<HTMLElement | null>(null)
 const inputElement = ref<HTMLInputElement | null>(null)
 const inputValue = ref('')
 const showSaved = ref(false)
 const isInView = ref(false)
-
-// Storage key
-const STORAGE_PREFIX = 'rc-badge-'
-const storageKey = STORAGE_PREFIX + props.badgeKey
 
 // Compute accent color CSS variable
 const accentColorVar = computed(() => `var(--color-stories-accent-${props.accentColor})`)
@@ -37,14 +36,16 @@ const containerStyle = computed(() => ({
 }))
 
 // Debounce timeout (setTimeout ID)
-// @ts-ignore - initialized as null, assigned setTimeout ID later
-let saveTimeout = null
+let saveTimeout: ReturnType<typeof setTimeout> | null = null
+
+// Store observer for cleanup
+let observer: IntersectionObserver | null = null
 
 // Load saved answer on mount (client-only)
 onMounted(() => {
   if (import.meta.client) {
-    // Load from localStorage
-    const saved = localStorage.getItem(storageKey)
+    // Load from badge store
+    const saved = loadBadge(props.badgeKey)
     if (saved) {
       inputValue.value = saved
     }
@@ -53,7 +54,7 @@ onMounted(() => {
     if (questionBlock.value) {
       const element = questionBlock.value
       setTimeout(() => {
-        const observer = new IntersectionObserver(
+        observer = new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {
               if (entry.isIntersecting) {
@@ -75,11 +76,6 @@ onMounted(() => {
         )
 
         observer.observe(element)
-
-        // Cleanup on unmount
-        onUnmounted(() => {
-          observer.disconnect()
-        })
       }, 100) // Small delay to ensure initial render
     }
   }
@@ -95,7 +91,6 @@ function handleInput(event) {
   const val = target.value.trim()
 
   // Clear existing timeout
-  // @ts-ignore - saveTimeout is setTimeout ID
   if (saveTimeout) {
     clearTimeout(saveTimeout)
   }
@@ -105,9 +100,8 @@ function handleInput(event) {
 
   if (val) {
     // Debounce save for 500ms
-    // @ts-ignore - saveTimeout stores setTimeout ID
     saveTimeout = setTimeout(() => {
-      localStorage.setItem(storageKey, val)
+      saveBadge(props.badgeKey, val)
       // Show "noted." confirmation after 300ms
       setTimeout(() => {
         showSaved.value = true
@@ -115,17 +109,17 @@ function handleInput(event) {
     }, 500)
   }
   else {
-    // Remove from localStorage if empty
-    localStorage.removeItem(storageKey)
+    // Remove badge if empty
+    removeBadge(props.badgeKey)
   }
 }
 
-// Cleanup timeout on unmount
+// Cleanup on unmount
 onUnmounted(() => {
-  // @ts-ignore - saveTimeout is setTimeout ID
   if (saveTimeout) {
     clearTimeout(saveTimeout)
   }
+  observer?.disconnect()
 })
 </script>
 
