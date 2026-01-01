@@ -4,7 +4,11 @@ Landing page for [Rollercoaster.dev](https://rollercoaster.dev) - tools for neur
 
 ## Status
 
-🚧 **Starting Fresh** - See [PROJECT_CONCEPT.md](./PROJECT_CONCEPT.md) for the phased roadmap.
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/rollercoaster-dev/landing)
+
+**Phase 0:** Static landing page - [View Live](https://rollercoaster.dev)
+
+See [PROJECT_CONCEPT.md](./PROJECT_CONCEPT.md) for the phased roadmap.
 
 ## Related
 
