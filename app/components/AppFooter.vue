@@ -26,8 +26,10 @@
           </a>
         </div>
 
-        <!-- Right: Language Switcher -->
-        <LanguageSwitcher />
+        <!-- Right: Language Switcher (client-only to avoid SSR issues with nuxt-i18n-micro) -->
+        <ClientOnly>
+          <LanguageSwitcher />
+        </ClientOnly>
       </div>
 
       <!-- Bottom row: Sign-off -->
