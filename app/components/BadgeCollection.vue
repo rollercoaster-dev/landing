@@ -8,13 +8,52 @@ const localeMap: Record<string, string> = {
 }
 
 // State
+const badgeSection = ref<HTMLElement | null>(null)
 const badges = ref({})
 const hasBadges = computed(() => Object.keys(badges.value).length > 0)
 
-// Load badges from localStorage on mount
-onMounted(() => {
+// Store observer for cleanup
+let observer: IntersectionObserver | null = null
+
+// Load badges from useBadges composable
+function refreshBadges() {
   const { getAllBadges } = useBadges()
   badges.value = getAllBadges()
+}
+
+// Load badges on mount and setup IntersectionObserver
+onMounted(() => {
+  // Initial load
+  refreshBadges()
+
+  // Setup IntersectionObserver (client-only)
+  if (import.meta.client && badgeSection.value) {
+    const element = badgeSection.value
+    // Delay to ensure initial render completes
+    setTimeout(() => {
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            // Refresh badges each time section enters viewport
+            // (user may have earned new badges while scrolling)
+            if (entry.isIntersecting) {
+              refreshBadges()
+            }
+          })
+        },
+        {
+          threshold: 0,
+          rootMargin: '-40% 0px -40% 0px',
+        },
+      )
+      observer.observe(element)
+    }, 100)
+  }
+})
+
+// Cleanup observer on unmount
+onUnmounted(() => {
+  observer?.disconnect()
 })
 
 // Get translated badge name
@@ -49,6 +88,7 @@ const getCurrentDate = () => {
 <template>
   <section
     v-if="hasBadges"
+    ref="badgeSection"
     class="badges-section"
   >
     <div class="badges-content">
