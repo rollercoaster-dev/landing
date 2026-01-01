@@ -10,7 +10,7 @@
       </h2>
 
       <p class="font-instrument-sans text-[1.15rem] leading-[1.85] text-[rgba(10,10,10,0.75)] mb-6">
-        A different kind of achievement tracker. You create badges for the things you accomplish — big or small, formal or personal. You decide what counts.
+        A different kind of tool. You create badges for the things you accomplish — big or small, formal or personal. You decide what counts.
       </p>
 
       <div class="values font-dm-mono text-[0.95rem] my-10 text-[var(--color-relief-accent)]">
@@ -28,7 +28,7 @@
           href="https://openbadges.org"
           target="_blank"
           rel="noopener"
-          class="text-[var(--color-relief-accent)] underline underline-offset-[4px] decoration-[var(--color-relief-accent)] decoration-[2px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--color-relief-accent)] focus-visible:outline-offset-2"
+          class="text-[var(--color-relief-accent)] underline underline-offset-[4px] decoration-[var(--color-relief-accent)] decoration-[2px] focus-visible:outline focus-visible:outline-[var(--color-relief-accent)] focus-visible:outline-offset-2"
         >Open Badges</a> — an open standard that means your credentials are portable, verifiable, and truly yours.
       </p>
     </div>
