@@ -76,7 +76,7 @@ export const questions: Question[] = [
     text: "Who could you teach what you've learned?",
     badgeKey: 'knowledge-sharer',
     accentColor: 4,
-    slideFrom: 'right',
+    slideFrom: 'left', // Changed: input on right side (more room since question is at 15% from left)
     marginLeft: '15%',
   },
 ]
