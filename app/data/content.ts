@@ -20,10 +20,10 @@ export interface Question {
  * Get translated stories
  */
 export function useStories() {
-  const { t } = useI18n()
+  const { $t } = useI18n()
 
   return computed<Story[]>(() =>
-    (t('stories.list', { returnObjects: true }) as any[]).map((story, i) => ({
+    ($t('stories.list', { returnObjects: true }) as any[]).map((story, i) => ({
       ...story,
       accentColor: (i % 4 + 1) as 1 | 2 | 3 | 4,
     })),
@@ -34,10 +34,10 @@ export function useStories() {
  * Get translated questions
  */
 export function useQuestions() {
-  const { t } = useI18n()
+  const { $t } = useI18n()
 
   const questionTexts = computed(() =>
-    t('questions.list', { returnObjects: true }) as string[],
+    $t('questions.list', { returnObjects: true }) as string[],
   )
 
   const badgeKeys = ['quiet-victory', 'thread-finder', 'skill-builder', 'knowledge-sharer']
@@ -65,12 +65,12 @@ export const BADGE_KEYS = {
  * Get translated badge names
  */
 export function useBadgeNames() {
-  const { t } = useI18n()
+  const { $t } = useI18n()
 
   return computed(() => ({
-    [BADGE_KEYS.quietVictory]: t('badges.names.quiet-victory'),
-    [BADGE_KEYS.threadFinder]: t('badges.names.thread-finder'),
-    [BADGE_KEYS.skillBuilder]: t('badges.names.skill-builder'),
-    [BADGE_KEYS.knowledgeSharer]: t('badges.names.knowledge-sharer'),
+    [BADGE_KEYS.quietVictory]: $t('badges.names.quiet-victory'),
+    [BADGE_KEYS.threadFinder]: $t('badges.names.thread-finder'),
+    [BADGE_KEYS.skillBuilder]: $t('badges.names.skill-builder'),
+    [BADGE_KEYS.knowledgeSharer]: $t('badges.names.knowledge-sharer'),
   }))
 }

@@ -1,24 +1,24 @@
 <script setup lang="ts">
 import { useStories, useQuestions } from '~/data/content'
 
-const { t } = useI18n()
+const { $t } = useI18n()
 const stories = useStories()
 const questions = useQuestions()
 
 useSeoMeta({
-  title: () => t('meta.title'),
-  description: () => t('meta.description'),
-  ogTitle: () => t('meta.title'),
-  ogDescription: () => t('meta.description'),
+  title: () => $t('meta.title'),
+  description: () => $t('meta.description'),
+  ogTitle: () => $t('meta.title'),
+  ogDescription: () => $t('meta.description'),
   ogUrl: 'https://rollercoaster.dev',
   ogType: 'website',
   ogImage: 'https://rollercoaster.dev/og-image.png',
-  ogImageAlt: () => t('meta.ogImageAlt'),
+  ogImageAlt: () => $t('meta.ogImageAlt'),
   twitterCard: 'summary_large_image',
-  twitterTitle: () => t('meta.title'),
-  twitterDescription: () => t('meta.description'),
+  twitterTitle: () => $t('meta.title'),
+  twitterDescription: () => $t('meta.description'),
   twitterImage: 'https://rollercoaster.dev/og-image.png',
-  twitterImageAlt: () => t('meta.ogImageAlt'),
+  twitterImageAlt: () => $t('meta.ogImageAlt'),
   themeColor: '#ffe50c',
 })
 </script>

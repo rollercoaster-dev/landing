@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { t } = useI18n()
+const { $t } = useI18n()
 
 // State
 const badges = ref({})
@@ -14,7 +14,7 @@ onMounted(() => {
 // Get translated badge name
 function getBadgeName(badgeKey: string): string {
   // Use the translation key from badges.names
-  return t(`badges.names.${badgeKey}`)
+  return $t(`badges.names.${badgeKey}`)
 }
 
 // Get badge accent color based on badge key

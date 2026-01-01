@@ -3,8 +3,8 @@
 // Full viewport with massive typography and neo-brutalist indentation
 // Uses useFitText for dynamic responsive scaling
 
-const { t } = useI18n()
-const lines = computed(() => t('hero.lines', { returnObjects: true }) as string[])
+const { $t } = useI18n()
+const lines = computed(() => $t('hero.lines', { returnObjects: true }) as string[])
 const { containerRef, lineRefs, fontSizes } = useFitText(lines.value, 20)
 
 // Line-specific styles for neo-brutalist staggered effect

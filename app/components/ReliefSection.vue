@@ -1,8 +1,8 @@
 <script setup lang="ts">
 // Relief section with platform explanation
 
-const { t } = useI18n()
-const values = computed(() => t('relief.values', { returnObjects: true }) as Array<{ label: string, separator: string }>)
+const { $t } = useI18n()
+const values = computed(() => $t('relief.values', { returnObjects: true }) as Array<{ label: string, separator: string }>)
 </script>
 
 <template>

@@ -2,15 +2,7 @@
 // LanguageSwitcher - Neo-brutalist language toggle
 // Shows available locales (not current one) with bold mono styling
 
-const { locale, locales, setLocale } = useI18n()
-
-const availableLocales = computed(() =>
-  locales.value.filter(l => l.code !== locale.value),
-)
-
-function switchLocale(code: string) {
-  setLocale(code)
-}
+const { $getLocale, $getLocales, $switchLocale } = useI18n()
 </script>
 
 <template>
@@ -19,11 +11,11 @@ function switchLocale(code: string) {
     aria-label="Language switcher"
   >
     <button
-      v-for="loc in availableLocales"
+      v-for="loc in $getLocales().filter(l => l.code !== $getLocale())"
       :key="loc.code"
       class="lang-button"
       :aria-label="`Switch to ${loc.name}`"
-      @click="switchLocale(loc.code)"
+      @click="$switchLocale(loc.code)"
     >
       {{ loc.code.toUpperCase() }}
     </button>
