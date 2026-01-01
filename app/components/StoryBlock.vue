@@ -17,7 +17,7 @@ const props = defineProps({
     type: Number,
     required: true,
   },
-  marginLeft: {
+  desktopMarginLeft: {
     type: String,
     default: '0',
   },
@@ -26,9 +26,9 @@ const props = defineProps({
 // Compute accent color CSS variable
 const accentColorVar = computed(() => `var(--color-stories-accent-${props.accentColor})`)
 
-// Compute margin-left style
+// Compute container style with CSS custom property for desktop margin
 const containerStyle = computed(() => ({
-  'marginLeft': props.marginLeft,
+  '--desktop-margin-left': props.desktopMarginLeft,
   '--story-accent': accentColorVar.value,
 }))
 </script>
@@ -61,6 +61,14 @@ const containerStyle = computed(() => ({
   position: relative;
   margin-bottom: 2rem;
   padding: 4rem 0;
+  margin-left: 0; /* Mobile-first: no offset */
+}
+
+/* Desktop: apply staggered margins */
+@media (min-width: 1024px) {
+  .story-block {
+    margin-left: var(--desktop-margin-left, 0);
+  }
 }
 
 /* Giant faded name background */
@@ -75,10 +83,24 @@ const containerStyle = computed(() => ({
   opacity: 0.15;
   position: absolute;
   top: 0;
-  left: -5%;
+  left: 0; /* Mobile-first: no negative offset */
   z-index: 1;
   pointer-events: none;
   white-space: nowrap;
+}
+
+/* Mobile/Tablet: constrain watermark to prevent clipping */
+@media (max-width: 1023px) {
+  .story-name {
+    font-size: clamp(4rem, 18vw, 10rem);
+  }
+}
+
+/* Desktop: full watermark with offset */
+@media (min-width: 1024px) {
+  .story-name {
+    left: -5%;
+  }
 }
 
 /* Story content overlay */
@@ -114,11 +136,7 @@ const containerStyle = computed(() => ({
 }
 
 /* Mobile adjustments */
-@media (max-width: 768px) {
-  .story-block {
-    margin-left: 0 !important;
-  }
-
+@media (max-width: 1023px) {
   .story-content {
     margin-top: -2rem;
   }
