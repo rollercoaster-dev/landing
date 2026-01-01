@@ -63,7 +63,7 @@ export const questions: Question[] = [
     badgeKey: 'thread-finder',
     accentColor: 2,
     desktopSlideFrom: 'right',
-    desktopMarginLeft: 'auto',
+    desktopMarginLeft: '35%',
   },
   {
     text: 'What skill have you been quietly building?',
