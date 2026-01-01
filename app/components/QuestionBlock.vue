@@ -13,11 +13,11 @@ const props = defineProps({
     type: Number,
     required: true,
   },
-  slideFrom: {
+  desktopSlideFrom: {
     type: String,
     required: true,
   },
-  marginLeft: {
+  desktopMarginLeft: {
     type: String,
     default: '0',
   },
@@ -37,11 +37,11 @@ const storageKey = STORAGE_PREFIX + props.badgeKey
 // Compute accent color CSS variable
 const accentColorVar = computed(() => `var(--color-stories-accent-${props.accentColor})`)
 
-// Compute container style
+// Compute container style with CSS custom properties for desktop layout
 const containerStyle = computed(() => ({
-  'marginLeft': props.marginLeft,
+  '--desktop-margin-left': props.desktopMarginLeft,
+  '--desktop-slide-from': props.desktopSlideFrom,
   '--question-accent': accentColorVar.value,
-  '--slide-from': props.slideFrom,
 }))
 
 // Debounce timeout (setTimeout ID)
@@ -178,6 +178,14 @@ onUnmounted(() => {
   position: relative;
   margin: 5rem 0 4rem;
   max-width: 800px;
+  margin-left: 0; /* Mobile-first: no offset */
+}
+
+/* Desktop: apply margin from props */
+@media (min-width: 1024px) {
+  .question-block {
+    margin-left: var(--desktop-margin-left, 0);
+  }
 }
 
 .question-text {
@@ -195,58 +203,54 @@ onUnmounted(() => {
   color: var(--question-accent);
 }
 
-/* Input wrapper — slides in from side */
+/* Input wrapper — mobile-first: stacked below */
 .question-input-wrap {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%) translateX(20px);
+  position: relative;
+  margin-top: 1.5rem;
   opacity: 0;
+  transform: translateY(20px);
   transition: opacity 0.8s ease, transform 0.8s ease;
   pointer-events: none;
 }
 
-/* Input on right side - slides in from left */
-.question-block[style*="--slide-from:left"] .question-input-wrap {
-  left: 100%;
-  margin-left: 2rem;
-  transform: translateY(-50%) translateX(-20px);
-}
-
-/* Input on left side - slides in from right */
-.question-block[style*="--slide-from:right"] .question-input-wrap {
-  right: 100%;
-  left: auto;
-  margin-right: 2rem;
-  transform: translateY(-50%) translateX(20px);
-  text-align: right;
-}
-
 .question-block.in-view .question-input-wrap {
   opacity: 1;
-  transform: translateY(-50%) translateX(0);
+  transform: translateY(0);
   pointer-events: auto;
 }
 
-/* Mobile: stack below instead of side */
-@media (max-width: 768px) {
+/* Desktop: side-by-side layout */
+@media (min-width: 1024px) {
   .question-input-wrap {
-    position: relative;
-    top: auto;
-    left: auto !important;
-    right: auto !important;
-    margin: 1.5rem 0 0 0 !important;
-    transform: translateY(20px);
-    text-align: left !important;
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    position: absolute;
+    top: 50%;
+    margin-top: 0;
+    transform: translateY(-50%) translateX(20px);
+  }
+
+  /* Input on right side - slides in from left */
+  .question-block[style*="--desktop-slide-from:left"] .question-input-wrap {
+    left: 100%;
+    margin-left: 2rem;
+    transform: translateY(-50%) translateX(-20px);
+  }
+
+  /* Input on left side - slides in from right */
+  .question-block[style*="--desktop-slide-from:right"] .question-input-wrap {
+    right: 100%;
+    left: auto;
+    margin-right: 2rem;
+    transform: translateY(-50%) translateX(20px);
+    text-align: right;
   }
 
   .question-block.in-view .question-input-wrap {
-    transform: translateY(0);
+    transform: translateY(-50%) translateX(0);
   }
 }
 
 .question-input {
-  width: 280px;
+  width: 100%; /* Mobile-first: full width */
   padding: 1rem 1.2rem;
   font-family: var(--font-mono);
   font-size: 1rem;
@@ -255,6 +259,13 @@ onUnmounted(() => {
   color: var(--color-white);
   outline: none;
   transition: background 0.2s;
+}
+
+/* Desktop: fixed width */
+@media (min-width: 1024px) {
+  .question-input {
+    width: 280px;
+  }
 }
 
 .question-input:focus {
@@ -297,13 +308,14 @@ onUnmounted(() => {
 
   .question-block.in-view .question-input-wrap {
     opacity: 1;
-    transform: translateY(-50%) translateX(0);
+    transform: translateY(0);
   }
+}
 
-  @media (max-width: 768px) {
-    .question-block.in-view .question-input-wrap {
-      transform: translateY(0);
-    }
+/* Desktop reduced motion */
+@media (min-width: 1024px) and (prefers-reduced-motion: reduce) {
+  .question-block.in-view .question-input-wrap {
+    transform: translateY(-50%) translateX(0);
   }
 }
 </style>
