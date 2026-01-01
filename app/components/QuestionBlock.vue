@@ -229,6 +229,11 @@ onUnmounted(() => {
 
 /* Mobile: stack below instead of side */
 @media (max-width: 768px) {
+  .question-block {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
   .question-input-wrap {
     position: relative;
     top: auto;
@@ -236,8 +241,13 @@ onUnmounted(() => {
     right: auto !important;
     margin: 1.5rem 0 0 0 !important;
     transform: translateY(20px);
-    text-align: left !important;
     transition: opacity 0.8s ease, transform 0.8s ease;
+    width: 100% !important;
+    text-align: left;
+  }
+
+  .question-input {
+    width: 100% !important;
   }
 
   .question-block.in-view .question-input-wrap {
