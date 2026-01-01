@@ -113,10 +113,14 @@ const containerStyle = computed(() => ({
   font-weight: 600;
 }
 
-/* Mobile: remove margin-left override */
+/* Mobile adjustments */
 @media (max-width: 768px) {
   .story-block {
     margin-left: 0 !important;
+  }
+
+  .story-content {
+    margin-top: -2rem;
   }
 }
 </style>
