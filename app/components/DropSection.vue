@@ -27,20 +27,20 @@
         Most tools punish this.
       </p>
 
-      <div class="punish-list font-[family-name:var(--font-mono)] text-[1.1rem] my-8">
-        <span class="mr-8">
+      <div class="punish-list font-[family-name:var(--font-mono)] text-[1.1rem] my-8 flex flex-wrap gap-x-8 gap-y-2">
+        <span class="whitespace-nowrap inline-block rotate-2">
           <span class="x text-[var(--color-drop-accent)] mr-1.5">×</span>
           <span
             class="text text-white/70 line-through decoration-[var(--color-drop-accent)] decoration-1"
           >Streak broken</span>
         </span>
-        <span class="mr-8">
+        <span class="whitespace-nowrap inline-block -rotate-1">
           <span class="x text-[var(--color-drop-accent)] mr-1.5">×</span>
           <span
             class="text text-white/70 line-through decoration-[var(--color-drop-accent)] decoration-1"
           >Progress lost</span>
         </span>
-        <span class="mr-8">
+        <span class="whitespace-nowrap inline-block rotate-1">
           <span class="x text-[var(--color-drop-accent)] mr-1.5">×</span>
           <span
             class="text text-white/70 line-through decoration-[var(--color-drop-accent)] decoration-1"
