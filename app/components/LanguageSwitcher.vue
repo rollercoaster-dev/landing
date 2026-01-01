@@ -2,21 +2,24 @@
 // LanguageSwitcher - Neo-brutalist language toggle
 // Shows available locales (not current one) with bold mono styling
 
-const { $t, $getLocale, $getLocales, $switchLocale } = useI18n()
+const { t, locale, locales, setLocale } = useI18n()
+
+// Filter to get locales other than current
+const otherLocales = computed(() =>
+  locales.value.filter((l: { code: string }) => l.code !== locale.value)
+)
 </script>
 
 <template>
   <nav
-    class="language-switcher"
-    :aria-label="$t('footer.languageSwitcher.label')"
-  >
+       class="language-switcher"
+       :aria-label="t('footer.languageSwitcher.label')">
     <button
-      v-for="loc in $getLocales().filter(l => l.code !== $getLocale())"
-      :key="loc.code"
-      class="lang-button"
-      :aria-label="$t('footer.languageSwitcher.switchTo', { language: loc.name })"
-      @click="$switchLocale(loc.code)"
-    >
+            v-for="loc in otherLocales"
+            :key="loc.code"
+            class="lang-button"
+            :aria-label="t('footer.languageSwitcher.switchTo', { language: loc.name })"
+            @click="setLocale(loc.code)">
       {{ loc.code.toUpperCase() }}
     </button>
   </nav>

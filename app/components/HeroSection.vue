@@ -3,8 +3,8 @@
 // Full viewport with massive typography and neo-brutalist indentation
 // Uses useFitText for dynamic responsive scaling
 
-const { $t } = useI18n()
-const lines = computed(() => $t('hero.lines') as string[])
+const { t, tm } = useI18n()
+const lines = computed(() => tm('hero.lines') as string[])
 const { containerRef, lineRefs, fontSizes, fitText } = useFitText(lines.value, 20)
 
 // Recalculate font sizes when locale changes (different text lengths)
@@ -24,9 +24,9 @@ const lineStyles = [
 ]
 
 // Template ref setter for v-for items
-function setLineRef(el: HTMLElement | null, index: number) {
+function setLineRef(el: Element | ComponentPublicInstance | null, index: number) {
   if (el && lineRefs[index]) {
-    lineRefs[index].value = el
+    lineRefs[index].value = el as HTMLElement
   }
 }
 
@@ -38,32 +38,27 @@ function getFontSize(index: number) {
 
 <template>
   <section
-    ref="containerRef"
-    class="hero min-h-screen bg-[var(--color-climb-bg)] p-4 md:p-8 flex flex-col justify-center relative"
-  >
+           ref="containerRef"
+           class="hero min-h-screen bg-[var(--color-climb-bg)] p-4 md:p-8 flex flex-col justify-center relative">
     <img
-      src="~/assets/RibbonRoller.svg"
-      :alt="$t('hero.logoAlt')"
-      class="absolute top-4 right-4 md:top-8 md:right-8 w-16 h-16 md:w-[200px] md:h-[200px]"
-    >
+         src="~/assets/RibbonRoller.svg"
+         :alt="t('hero.logoAlt')"
+         class="absolute top-4 right-4 md:top-8 md:right-8 w-16 h-16 md:w-[200px] md:h-[200px]">
     <h1
-      class="font-[family-name:var(--font-headline)] font-[900] leading-[0.85] -tracking-[0.04em] uppercase text-[var(--color-climb-text)]"
-    >
+        class="font-[family-name:var(--font-headline)] font-[900] leading-[0.85] -tracking-[0.04em] uppercase text-[var(--color-climb-text)]">
       <span
-        v-for="(line, index) in lines"
-        :key="line"
-        :ref="(el) => setLineRef(el, index)"
-        class="block whitespace-nowrap"
-        :class="lineStyles[index]"
-        :style="{ fontSize: getFontSize(index) }"
-      >
+            v-for="(line, index) in lines"
+            :key="line"
+            :ref="(el) => setLineRef(el, index)"
+            class="block whitespace-nowrap"
+            :class="lineStyles[index]"
+            :style="{ fontSize: getFontSize(index) }">
         {{ line }}
       </span>
     </h1>
     <p
-      class="tagline font-[family-name:var(--font-mono)] text-[clamp(0.8rem,1.5vw,1rem)] font-normal text-[var(--color-climb-text)] opacity-70 mt-8 text-left md:text-right max-w-[300px] md:ml-auto"
-    >
-      {{ $t('hero.tagline') }}
+       class="tagline font-[family-name:var(--font-mono)] text-[clamp(0.8rem,1.5vw,1rem)] font-normal text-[var(--color-climb-text)] opacity-70 mt-8 text-left md:text-right max-w-[300px] md:ml-auto">
+      {{ t('hero.tagline') }}
     </p>
   </section>
 </template>

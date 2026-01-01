@@ -2,7 +2,7 @@
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineNuxtConfig({
-  modules: ['@nuxt/eslint', '@nuxtjs/seo', 'nuxt-i18n-micro'],
+  modules: ['@nuxt/eslint', '@nuxtjs/seo', '@nuxtjs/i18n'],
   devtools: { enabled: true },
 
   app: {
@@ -42,19 +42,18 @@ export default defineNuxtConfig({
 
   i18n: {
     locales: [
-      { code: 'en', iso: 'en-US', name: 'English' },
-      { code: 'de', iso: 'de-DE', name: 'Deutsch' },
+      { code: 'en', language: 'en-US', name: 'English', file: 'en.json' },
+      { code: 'de', language: 'de-DE', name: 'Deutsch', file: 'de.json' },
     ],
     defaultLocale: 'en',
     strategy: 'prefix_except_default',
+    lazy: true,
+    langDir: 'locales',
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: 'i18n_redirected',
       alwaysRedirect: false,
       fallbackLocale: 'en',
     },
-    meta: true,
-    translationDir: 'locales',
-    autoImportTranslationFunctions: true,
   },
 })

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { $getLocale } = useI18n()
+const { t, locale } = useI18n()
 
 // Map locale codes to BCP 47 language tags for date formatting
 const localeMap: Record<string, string> = {
@@ -9,8 +9,8 @@ const localeMap: Record<string, string> = {
 
 // Get locale-aware date string
 const getFormattedDate = () => {
-  const locale = localeMap[$getLocale()] || 'en-US'
-  return new Date().toLocaleDateString(locale, {
+  const localeCode = localeMap[locale.value] || 'en-US'
+  return new Date().toLocaleDateString(localeCode, {
     month: 'short',
     day: 'numeric',
     year: 'numeric',
@@ -106,34 +106,31 @@ onUnmounted(() => {
     <div class="pause-content">
       <!-- Returning user message -->
       <p
-        class="returning"
-        :class="{ visible: isReturning }"
-      >
-        {{ $t('pause.returningMessage') }}
+         class="returning"
+         :class="{ visible: isReturning }">
+        {{ t('pause.returningMessage') }}
       </p>
 
       <!-- Question -->
       <h2 class="pause-question">
-        {{ $t('pause.question') }}
+        {{ t('pause.question') }}
       </h2>
 
       <!-- Input -->
       <input
-        v-model="inputValue"
-        type="text"
-        class="pause-input"
-        :placeholder="$t('pause.placeholder')"
-        maxlength="140"
-        :aria-label="$t('pause.question')"
-      >
+             v-model="inputValue"
+             type="text"
+             class="pause-input"
+             :placeholder="t('pause.placeholder')"
+             maxlength="140"
+             :aria-label="t('pause.question')">
 
       <!-- Badge Preview -->
       <div
-        class="badge-output"
-        :class="{ visible: showBadge }"
-      >
+           class="badge-output"
+           :class="{ visible: showBadge }">
         <div class="badge-label">
-          {{ $t('pause.badgeLabel') }}
+          {{ t('pause.badgeLabel') }}
         </div>
         <div class="badge-text">
           {{ badgeText }}
@@ -142,7 +139,7 @@ onUnmounted(() => {
           {{ badgeDate }}
         </div>
         <div class="badge-response">
-          {{ $t('pause.badgeResponse') }}
+          {{ t('pause.badgeResponse') }}
         </div>
       </div>
     </div>
