@@ -44,18 +44,16 @@ useSeoMeta({
         Who we're building for
       </h2>
 
-      <div class="story-question-grid">
-        <template
-          v-for="(story, i) in stories"
-          :key="story.name"
-        >
-          <StoryBlock v-bind="story" />
-          <QuestionBlock
-            v-if="questions[i]"
-            v-bind="questions[i]"
-          />
-        </template>
-      </div>
+      <template
+        v-for="(story, i) in stories"
+        :key="story.name"
+      >
+        <StoryBlock v-bind="story" />
+        <QuestionBlock
+          v-if="questions[i]"
+          v-bind="questions[i]"
+        />
+      </template>
 
       <p class="stories-note">
         Composite stories drawn from neurodivergent experiences.
@@ -125,10 +123,5 @@ useSeoMeta({
   font-size: 0.7rem;
   color: rgba(255, 255, 255, 0.5);
   margin-left: 0;
-}
-
-/* Story-Question container - stacked layout */
-.story-question-grid {
-  display: block;
 }
 </style>
