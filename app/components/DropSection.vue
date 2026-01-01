@@ -1,6 +1,9 @@
 <script setup lang="ts">
 // DropSection - The Drop
 // Dark gradient section with purple accent highlighting the drop
+
+const { $t } = useI18n()
+const punishList = computed(() => $t('drop.punishList', { returnObjects: true }) as string[])
 </script>
 
 <template>
@@ -11,20 +14,19 @@
       <h2
         class="font-[family-name:var(--font-headline)] font-bold text-[clamp(2.5rem,8vw,6rem)] leading-[0.95] text-[var(--color-drop-accent)] mb-16 max-w-[600px]"
       >
-        Sometimes the fog rolls in.
+        {{ $t('drop.headline') }}
       </h2>
 
       <p
         class="font-[family-name:var(--font-body)] font-normal text-[clamp(1.1rem,2vw,1.4rem)] leading-[2] text-white/80 mb-6"
       >
-        The projects scatter. The momentum disappears.
-        You stop for a day, then a week, then you lose count.
+        {{ $t('drop.paragraphs.0') }}
       </p>
 
       <p
         class="font-[family-name:var(--font-body)] font-normal text-[clamp(1.1rem,2vw,1.4rem)] leading-[2] text-white/80 mb-6"
       >
-        Most tools punish this.
+        {{ $t('drop.paragraphs.1') }}
       </p>
 
       <div class="punish-list font-[family-name:var(--font-mono)] text-[1.1rem] my-8 flex flex-wrap gap-x-8 gap-y-2">
@@ -32,32 +34,32 @@
           <span class="x text-[var(--color-drop-accent)] mr-1.5">×</span>
           <span
             class="text text-white/70 line-through decoration-[var(--color-drop-accent)] decoration-1"
-          >Streak broken</span>
+          >{{ punishList[0] }}</span>
         </span>
         <span class="whitespace-nowrap inline-block -rotate-1">
           <span class="x text-[var(--color-drop-accent)] mr-1.5">×</span>
           <span
             class="text text-white/70 line-through decoration-[var(--color-drop-accent)] decoration-1"
-          >Progress lost</span>
+          >{{ punishList[1] }}</span>
         </span>
         <span class="whitespace-nowrap inline-block rotate-1">
           <span class="x text-[var(--color-drop-accent)] mr-1.5">×</span>
           <span
             class="text text-white/70 line-through decoration-[var(--color-drop-accent)] decoration-1"
-          >Start over</span>
+          >{{ punishList[2] }}</span>
         </span>
       </div>
 
       <p
         class="we-know text-[clamp(1.2rem,2.5vw,1.6rem)] text-[var(--color-white)] mt-12"
       >
-        We know what that feels like.
+        {{ $t('drop.paragraphs.2') }}
       </p>
 
       <span
         class="aside font-[family-name:var(--font-mono)] text-[0.7rem] text-white/60 mt-16 inline-block"
       >
-        (still here? good.)
+        {{ $t('drop.aside') }}
       </span>
     </div>
   </section>

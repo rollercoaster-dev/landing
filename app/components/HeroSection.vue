@@ -3,8 +3,16 @@
 // Full viewport with massive typography and neo-brutalist indentation
 // Uses useFitText for dynamic responsive scaling
 
-const lines = ['The', 'Roller', 'Coaster', 'Is The', 'Path']
-const { containerRef, lineRefs, fontSizes } = useFitText(lines, 20)
+const { $t } = useI18n()
+const lines = computed(() => $t('hero.lines', { returnObjects: true }) as string[])
+const { containerRef, lineRefs, fontSizes, fitText } = useFitText(lines.value, 20)
+
+// Recalculate font sizes when locale changes (different text lengths)
+watch(lines, () => {
+  nextTick(() => {
+    fitText()
+  })
+})
 
 // Line-specific styles for neo-brutalist staggered effect
 const lineStyles = [
@@ -35,9 +43,9 @@ function getFontSize(index: number) {
   >
     <img
       src="~/assets/RibbonRoller.svg"
-      alt="Rollercoaster.dev logo"
+      :alt="$t('hero.logoAlt')"
       class="absolute top-4 right-4 md:top-8 md:right-8 w-16 h-16 md:w-[200px] md:h-[200px]"
-    />
+    >
     <h1
       class="font-[family-name:var(--font-headline)] font-[900] leading-[0.85] -tracking-[0.04em] uppercase text-[var(--color-climb-text)]"
     >
@@ -55,7 +63,7 @@ function getFontSize(index: number) {
     <p
       class="tagline font-[family-name:var(--font-mono)] text-[clamp(0.8rem,1.5vw,1rem)] font-normal text-[var(--color-climb-text)] opacity-70 mt-8 text-left md:text-right max-w-[300px] md:ml-auto"
     >
-      progress tracking for minds that don't move in straight lines
+      {{ $t('hero.tagline') }}
     </p>
   </section>
 </template>

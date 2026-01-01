@@ -1,20 +1,24 @@
 <script setup lang="ts">
-import { stories, questions } from '~/data/content'
+import { useStories, useQuestions } from '~/data/content'
+
+const { $t } = useI18n()
+const stories = useStories()
+const questions = useQuestions()
 
 useSeoMeta({
-  title: 'Rollercoaster.dev — Ride Yours',
-  description: 'Progress tracking for minds that don\'t move in straight lines',
-  ogTitle: 'Rollercoaster.dev — Ride Yours',
-  ogDescription: 'Progress tracking for minds that don\'t move in straight lines',
+  title: () => $t('meta.title'),
+  description: () => $t('meta.description'),
+  ogTitle: () => $t('meta.title'),
+  ogDescription: () => $t('meta.description'),
   ogUrl: 'https://rollercoaster.dev',
   ogType: 'website',
   ogImage: 'https://rollercoaster.dev/og-image.png',
-  ogImageAlt: 'Rollercoaster.dev — Progress tracking for minds that don\'t move in straight lines',
+  ogImageAlt: () => $t('meta.ogImageAlt'),
   twitterCard: 'summary_large_image',
-  twitterTitle: 'Rollercoaster.dev — Ride Yours',
-  twitterDescription: 'Progress tracking for minds that don\'t move in straight lines',
+  twitterTitle: () => $t('meta.title'),
+  twitterDescription: () => $t('meta.description'),
   twitterImage: 'https://rollercoaster.dev/og-image.png',
-  twitterImageAlt: 'Rollercoaster.dev — Progress tracking for minds that don\'t move in straight lines',
+  twitterImageAlt: () => $t('meta.ogImageAlt'),
   themeColor: '#ffe50c',
 })
 </script>
@@ -27,7 +31,7 @@ useSeoMeta({
     <a
       href="#main"
       class="skip-link"
-    >Skip to content</a>
+    >{{ $t('skipLink') }}</a>
 
     <!-- Hero Section -->
     <HeroSection />
@@ -41,7 +45,7 @@ useSeoMeta({
       class="stories"
     >
       <h2 class="stories-header">
-        Who we're building for
+        {{ $t('stories.header') }}
       </h2>
 
       <template
@@ -56,7 +60,7 @@ useSeoMeta({
       </template>
 
       <p class="stories-note">
-        Composite stories drawn from neurodivergent experiences.
+        {{ $t('stories.note') }}
       </p>
     </section>
 

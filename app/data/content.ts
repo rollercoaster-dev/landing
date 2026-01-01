@@ -1,6 +1,6 @@
 /**
  * Centralized content data for landing page
- * Extracted from prototype-v6.html
+ * Now using i18n for translations
  */
 
 export interface Story {
@@ -16,59 +16,78 @@ export interface Question {
   accentColor: 1 | 2 | 3 | 4
 }
 
-export const stories: Story[] = [
-  {
-    name: 'Lina',
-    title: 'The quiet victory',
-    text: 'She reorganized the library\'s entire local history section while volunteering — months of quiet work she chose because she knew it mattered. When she finished, she made a badge for herself: <strong>"Local History Archivist."</strong> No approval queue. No external validation. Just a private way to honor something only she understood the weight of.',
-    accentColor: 1,
-  },
-  {
-    name: 'Eva',
-    title: 'The big map',
-    text: "In a manic surge, she planned a massive urban farm — site surveys, greenhouse designs, compost networks. Dozens of badges for dozens of ideas, branching everywhere at once. Then the crash hit. She stopped. Months passed. Two years later, she reopened her account. The platform had kept everything. It showed her what she couldn't see before: the composting badge was always the strongest — and others had already earned it.",
-    accentColor: 2,
-  },
-  {
-    name: 'Malik',
-    title: 'The midnight model',
-    text: "He'd been teaching himself 3D modelling at night — weeks of on-off learning between everything else. When he finished his first complete scene, he uploaded the evidence: screenshots, a timelapse, a short reflection. The platform verified it. Not because anyone demanded proof — but because he wanted that checkmark for himself. It became the nudge he needed to start the next one.",
-    accentColor: 3,
-  },
-  {
-    name: 'Carmen',
-    title: 'Passing it on',
-    text: "After a full season of raised beds, Carmen made herself a badge — her own record of what she'd learned. Then she mentored Kayla, a 16-year-old who wanted to grow vegetables for her family. When Kayla finished her first bed, she made her own badge. Carmen verified it. Two other gardeners in the network approved it. Now Kayla has proof of something she built — and Carmen sees her knowledge rippling forward.",
-    accentColor: 4,
-  },
-]
+// Raw story from translation (without accentColor)
+interface RawStory {
+  name: string
+  title: string
+  text: string
+}
 
-export const questions: Question[] = [
-  {
-    text: 'Do you have a quiet victory that deserves a mark?',
-    badgeKey: 'quiet-victory',
-    accentColor: 1,
-  },
-  {
-    text: "What's one thread you could pull from something you started?",
-    badgeKey: 'thread-finder',
-    accentColor: 2,
-  },
-  {
-    text: 'What skill have you been quietly building?',
-    badgeKey: 'skill-builder',
-    accentColor: 3,
-  },
-  {
-    text: "Who could you teach what you've learned?",
-    badgeKey: 'knowledge-sharer',
-    accentColor: 4,
-  },
-]
+// Badge keys mapped to question indices
+const QUESTION_BADGE_KEYS = ['quiet-victory', 'thread-finder', 'skill-builder', 'knowledge-sharer'] as const
 
-export const BADGE_NAMES: Record<string, string> = {
-  'quiet-victory': 'Quiet Victory',
-  'thread-finder': 'Thread Finder',
-  'skill-builder': 'Skill Builder',
-  'knowledge-sharer': 'Knowledge Sharer',
+/**
+ * Get translated stories with runtime validation
+ */
+export function useStories() {
+  const { $t } = useI18n()
+
+  return computed<Story[]>(() => {
+    const data = $t('stories.list', { returnObjects: true })
+    if (!Array.isArray(data)) {
+      console.warn('stories.list translation is not an array')
+      return []
+    }
+    return (data as RawStory[]).map((story, i) => ({
+      ...story,
+      accentColor: ((i % 4) + 1) as 1 | 2 | 3 | 4,
+    }))
+  })
+}
+
+/**
+ * Get translated questions with runtime validation
+ */
+export function useQuestions() {
+  const { $t } = useI18n()
+
+  return computed<Question[]>(() => {
+    const data = $t('questions.list', { returnObjects: true })
+    if (!Array.isArray(data)) {
+      console.warn('questions.list translation is not an array')
+      return []
+    }
+    // Only map questions that have corresponding badge keys
+    return (data as string[])
+      .slice(0, QUESTION_BADGE_KEYS.length)
+      .map((text, i) => ({
+        text,
+        badgeKey: QUESTION_BADGE_KEYS[i],
+        accentColor: ((i % 4) + 1) as 1 | 2 | 3 | 4,
+      }))
+  })
+}
+
+/**
+ * Badge names (language-agnostic keys)
+ */
+export const BADGE_KEYS = {
+  quietVictory: 'quiet-victory',
+  threadFinder: 'thread-finder',
+  skillBuilder: 'skill-builder',
+  knowledgeSharer: 'knowledge-sharer',
+} as const
+
+/**
+ * Get translated badge names
+ */
+export function useBadgeNames() {
+  const { $t } = useI18n()
+
+  return computed(() => ({
+    [BADGE_KEYS.quietVictory]: $t('badges.names.quiet-victory'),
+    [BADGE_KEYS.threadFinder]: $t('badges.names.thread-finder'),
+    [BADGE_KEYS.skillBuilder]: $t('badges.names.skill-builder'),
+    [BADGE_KEYS.knowledgeSharer]: $t('badges.names.knowledge-sharer'),
+  }))
 }

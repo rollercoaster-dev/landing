@@ -1,5 +1,11 @@
 <script setup lang="ts">
-import { BADGE_NAMES } from '~/data/content'
+const { $t, $getLocale } = useI18n()
+
+// Map locale codes to BCP 47 language tags for date formatting
+const localeMap: Record<string, string> = {
+  en: 'en-US',
+  de: 'de-DE',
+}
 
 // State
 const badges = ref({})
@@ -10,6 +16,12 @@ onMounted(() => {
   const { getAllBadges } = useBadges()
   badges.value = getAllBadges()
 })
+
+// Get translated badge name
+function getBadgeName(badgeKey: string): string {
+  // Use the translation key from badges.names
+  return $t(`badges.names.${badgeKey}`)
+}
 
 // Get badge accent color based on badge key
 // @ts-ignore - badgeKey comes from v-for
@@ -26,10 +38,11 @@ function getBadgeAccent(badgeKey) {
   return 'var(--color-stories-accent-1)'
 }
 
-// Get current date in short format
+// Get current date in locale-aware format
 const getCurrentDate = () => {
   const now = new Date()
-  return now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+  const locale = localeMap[$getLocale()] || 'en-US'
+  return now.toLocaleDateString(locale, { month: 'short', day: 'numeric', year: 'numeric' })
 }
 </script>
 
@@ -40,10 +53,10 @@ const getCurrentDate = () => {
   >
     <div class="badges-content">
       <h2 class="badges-heading">
-        Your badges
+        {{ $t('badges.heading') }}
       </h2>
       <p class="badges-intro">
-        You answered the questions. Here's what you claimed.
+        {{ $t('badges.intro') }}
       </p>
       <div class="badges-grid">
         <div
@@ -54,7 +67,7 @@ const getCurrentDate = () => {
           :style="{ '--badge-accent': getBadgeAccent(String(badgeKey)) }"
         >
           <p class="badge-name">
-            {{ BADGE_NAMES[String(badgeKey)] || badgeKey }}
+            {{ getBadgeName(String(badgeKey)) }}
           </p>
           <p class="badge-answer">
             {{ answer }}

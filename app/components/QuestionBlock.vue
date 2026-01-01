@@ -146,7 +146,7 @@ onUnmounted(() => {
         v-model="inputValue"
         type="text"
         class="question-input"
-        placeholder="type here..."
+        :placeholder="$t('questions.placeholder')"
         maxlength="200"
         :aria-label="text"
         @input="handleInput"
@@ -155,7 +155,7 @@ onUnmounted(() => {
         class="question-saved"
         :class="{ visible: showSaved }"
       >
-        noted.
+        {{ $t('questions.noted') }}
       </p>
     </div>
   </div>

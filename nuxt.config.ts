@@ -2,13 +2,13 @@
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineNuxtConfig({
-  modules: ['@nuxt/eslint', '@nuxtjs/seo'],
+  modules: ['@nuxt/eslint', '@nuxtjs/seo', 'nuxt-i18n-micro'],
   devtools: { enabled: true },
 
   app: {
     head: {
       htmlAttrs: {
-        lang: 'en',
+        // lang attribute now handled by i18n module
       },
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -38,5 +38,23 @@ export default defineNuxtConfig({
     config: {
       stylistic: true, // Enable stylistic rules (formatting-like)
     },
+  },
+
+  i18n: {
+    locales: [
+      { code: 'en', iso: 'en-US', name: 'English' },
+      { code: 'de', iso: 'de-DE', name: 'Deutsch' },
+    ],
+    defaultLocale: 'en',
+    strategy: 'prefix_except_default',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      alwaysRedirect: false,
+      fallbackLocale: 'en',
+    },
+    meta: true,
+    translationDir: 'locales',
+    autoImportTranslationFunctions: true,
   },
 })

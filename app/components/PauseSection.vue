@@ -1,4 +1,22 @@
 <script setup lang="ts">
+const { $getLocale } = useI18n()
+
+// Map locale codes to BCP 47 language tags for date formatting
+const localeMap: Record<string, string> = {
+  en: 'en-US',
+  de: 'de-DE',
+}
+
+// Get locale-aware date string
+const getFormattedDate = () => {
+  const locale = localeMap[$getLocale()] || 'en-US'
+  return new Date().toLocaleDateString(locale, {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  })
+}
+
 // State
 const inputValue = ref('')
 const showBadge = ref(false)
@@ -44,11 +62,7 @@ watch(inputValue, (newVal) => {
     // Debounce save for 400ms
     // @ts-ignore - saveTimeout stores setTimeout ID
     saveTimeout = setTimeout(() => {
-      const now = new Date().toLocaleDateString('en-US', {
-        month: 'short',
-        day: 'numeric',
-        year: 'numeric',
-      })
+      const now = getFormattedDate()
       badgeText.value = val
       badgeDate.value = now
       showBadge.value = true
@@ -77,11 +91,7 @@ onUnmounted(() => {
 
   const pending = inputValue.value.trim()
   if (pending) {
-    const now = new Date().toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric',
-    })
+    const now = getFormattedDate()
     badgeText.value = pending
     badgeDate.value = now
     showBadge.value = true
@@ -99,12 +109,12 @@ onUnmounted(() => {
         class="returning"
         :class="{ visible: isReturning }"
       >
-        // you came back
+        {{ $t('pause.returningMessage') }}
       </p>
 
       <!-- Question -->
       <h2 class="pause-question">
-        What did you do today that mattered?
+        {{ $t('pause.question') }}
       </h2>
 
       <!-- Input -->
@@ -112,9 +122,9 @@ onUnmounted(() => {
         v-model="inputValue"
         type="text"
         class="pause-input"
-        placeholder="even small things count..."
+        :placeholder="$t('pause.placeholder')"
         maxlength="140"
-        aria-label="What did you do today that mattered?"
+        :aria-label="$t('pause.question')"
       >
 
       <!-- Badge Preview -->
@@ -123,7 +133,7 @@ onUnmounted(() => {
         :class="{ visible: showBadge }"
       >
         <div class="badge-label">
-          // you showed up
+          {{ $t('pause.badgeLabel') }}
         </div>
         <div class="badge-text">
           {{ badgeText }}
@@ -132,7 +142,7 @@ onUnmounted(() => {
           {{ badgeDate }}
         </div>
         <div class="badge-response">
-          noted.
+          {{ $t('pause.badgeResponse') }}
         </div>
       </div>
     </div>
