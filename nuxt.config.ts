@@ -58,5 +58,8 @@ export default defineNuxtConfig({
     bundle: {
       optimizeTranslationDirective: false,
     },
+    compilation: {
+      strictMessage: false, // Allow HTML in translations
+    },
   },
 })
