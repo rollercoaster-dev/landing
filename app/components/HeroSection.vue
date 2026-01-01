@@ -5,7 +5,14 @@
 
 const { $t } = useI18n()
 const lines = computed(() => $t('hero.lines', { returnObjects: true }) as string[])
-const { containerRef, lineRefs, fontSizes } = useFitText(lines.value, 20)
+const { containerRef, lineRefs, fontSizes, fitText } = useFitText(lines.value, 20)
+
+// Recalculate font sizes when locale changes (different text lengths)
+watch(lines, () => {
+  nextTick(() => {
+    fitText()
+  })
+})
 
 // Line-specific styles for neo-brutalist staggered effect
 const lineStyles = [
